@@ -1,26 +1,31 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-4">Movies</h1>
-    <div v-if="movies.length">
-      <div v-for="movie in movies" :key="movie._id" class="mb-4 p-4 border rounded">
-        <router-link :to="`/movie/${movie._id}`" class="text-xl font-semibold">{{ movie.title }}</router-link>
-        <p>{{ movie.description }}</p>
-      </div>
+  <div class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Welcome to YouTube App</h1>
+    <div v-if="videos.length === 0">No videos available.</div>
+    <div v-else>
+      <h2 class="text-xl font-semibold mb-2">Videos:</h2>
+      <ul>
+        <li v-for="video in videos" :key="video._id" class="mb-2">
+          <router-link :to="{ path: `/video/${video._id}` }" class="text-blue-500">{{ video.title }}</router-link>
+        </li>
+      </ul>
     </div>
-    <div v-else>No movies available.</div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue'
+import { useVideoStore } from '../../stores/videoStore'
 
-const movies = ref([])
-onMounted(async () => {
-  const response = await axios.get('http://localhost:3000/movies')
-  movies.value = response.data
+export default defineComponent({
+  setup () {
+    const videoStore = useVideoStore()
+
+    onMounted(async () => {
+      await videoStore.fetchVideos()
+    })
+
+    return { videos: videoStore.videos }
+  }
 })
 </script>
-
-<style scoped>
-</style>
