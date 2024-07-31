@@ -9,29 +9,24 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useUserStore } from '../../stores/userStore'
 import { useRouter } from 'vue-router'
 
-export default defineComponent({
-  setup () {
-    const username = ref('')
-    const password = ref('')
-    const userStore = useUserStore()
-    const router = useRouter()
+const username = ref('')
+const password = ref('')
+const userStore = useUserStore()
+const router = useRouter()
 
-    const login = async () => {
-      try {
-        await userStore.login(username.value, password.value)
+const login = async () => {
+  try {
+    await userStore.login(username.value, password.value)
 
-        router.push({ name: 'home' })
-      } catch (error) {
-        console.error('Ошибка при входе:', error)
-      }
-    }
-
-    return { username, password, login }
+    router.push({ name: 'home' })
+  } catch (error) {
+    console.error('Ошибка авторизации:', error)
   }
-})
+}
+
 </script>

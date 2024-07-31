@@ -13,19 +13,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+<script setup lang="ts">
+import { onMounted } from 'vue'
 import { useVideoStore } from '../../stores/videoStore'
 
-export default defineComponent({
-  setup () {
-    const videoStore = useVideoStore()
+const videoStore = useVideoStore()
 
-    onMounted(async () => {
-      await videoStore.fetchVideos()
-    })
-
-    return { videos: videoStore.videos }
-  }
+onMounted(async () => {
+  await videoStore.fetchVideos()
 })
+
+const videos = videoStore.videos
 </script>

@@ -7,18 +7,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import SimpleLayoutHeader from '@/views/layouts/SimpleLayoutHeader.vue'
-
-export default defineComponent({
-  name: 'SimpleLayout',
-  components: {
-    SimpleLayoutHeader
-  }
-})
 </script>
-
-<style scoped>
-/* Добавьте стили по вашему усмотрению */
-</style>

@@ -11,25 +11,18 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 
-export default defineComponent({
-  name: 'AppLayoutHeader',
-  setup () {
-    const userStore = useUserStore()
-    const router = useRouter()
+const userStore = useUserStore()
+const router = useRouter()
 
-    const logout = () => {
-      userStore.logout()
-      router.push('/login')
-    }
+const logout = () => {
+  userStore.logout()
+  router.push('/login')
+}
 
-    return { logout }
-  }
-})
 </script>
 
 <style scoped>

@@ -10,22 +10,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useUserStore } from '../../stores/userStore'
+import { useRouter } from 'vue-router'
 
-export default defineComponent({
-  setup () {
-    const username = ref('')
-    const email = ref('')
-    const password = ref('')
-    const userStore = useUserStore()
+const username = ref('')
+const email = ref('')
+const password = ref('')
+const userStore = useUserStore()
+const router = useRouter()
 
-    const register = async () => {
-      await userStore.register(username.value, email.value, password.value)
-    }
+const register = async () => {
+  try {
+    await userStore.register(username.value, email.value, password.value)
 
-    return { username, email, password, register }
+    router.push({ name: 'home' })
+  } catch (error) {
+    console.error('Ошибка авторизации: ', error)
   }
-})
+}
+
 </script>

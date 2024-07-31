@@ -10,22 +10,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useVideoStore } from '../../stores/videoStore'
 
-export default defineComponent({
-  setup () {
-    const title = ref('')
-    const description = ref('')
-    const url = ref('')
-    const videoStore = useVideoStore()
+const title = ref('')
+const description = ref('')
+const url = ref('')
+const videoStore = useVideoStore()
 
-    const upload = async () => {
-      await videoStore.uploadVideo(title.value, description.value, url.value)
-    }
-
-    return { title, description, url, upload }
-  }
-})
+const upload = async () => {
+  await videoStore.uploadVideo(title.value, description.value, url.value)
+}
 </script>

@@ -6,23 +6,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { useVideoStore } from '../../stores/videoStore'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-  setup () {
-    const route = useRoute()
-    const videoStore = useVideoStore()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const video = ref<any>({ title: '', description: '', url: '' })
+const route = useRoute()
+const videoStore = useVideoStore()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const video = ref<any>({ title: '', description: '', url: '' })
 
-    onMounted(async () => {
-      video.value = await videoStore.fetchVideo(route.params.id as string)
-    })
-
-    return { video }
-  }
+onMounted(async () => {
+  video.value = await videoStore.fetchVideo(route.params.id as string)
 })
+
 </script>
