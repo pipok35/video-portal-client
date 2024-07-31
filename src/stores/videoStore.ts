@@ -8,7 +8,7 @@ export const useVideoStore = defineStore('video', {
   }),
   actions: {
     async fetchVideos () {
-      const response = await axios.get('http://localhost:3000/videos')
+      const response = await axios.get('/videos')
       this.videos = response.data
     },
     async fetchVideo (id: string) {
