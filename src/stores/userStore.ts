@@ -8,15 +8,15 @@ export const useUserStore = defineStore('user', {
     token: localStorage.getItem('token') || ''
   }),
   actions: {
-    async login (username: string, password: string) {
-      const response = await axios.post('/auth/login', { username, password })
+    async login (email: string, password: string) {
+      const response = await axios.post('/auth/login', { email, password })
       this.token = response.data.access_token
       localStorage.setItem('token', this.token)
       await this.fetchUser()
     },
     async register (username: string, email: string, password: string) {
       await axios.post('/users/register', { username, email, password })
-      await this.login(username, password)
+      await this.login(email, password)
     },
     async fetchUser () {
       if (this.token) {
