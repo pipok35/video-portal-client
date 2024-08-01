@@ -7,7 +7,7 @@ import Upload from '../views/pages/Upload.vue'
 
 const routes = [
   { name: 'home', path: '/', component: Home, meta: { layout: 'AppLayout' } },
-  { name: 'videoView', path: '/video/:id', component: Video, meta: { layout: 'AppLayout' } },
+  { name: 'video', path: '/video/:id', component: Video, meta: { layout: 'AppLayout' } },
   { name: 'register', path: '/register', component: Register, meta: { layout: 'SimpleLayout' } },
   { name: 'upload', path: '/upload', component: Upload, meta: { layout: 'AppLayout' } },
   { name: 'login', path: '/login', component: Login, meta: { layout: 'SimpleLayout' } }
