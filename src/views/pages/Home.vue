@@ -19,10 +19,11 @@ import { ref, onMounted } from 'vue'
 import { useVideoStore } from '../../stores/videoStore'
 
 interface Video {
-  _id: string;
-  title: string;
-  description: string;
-  ovnerId: string;
+  _id: string,
+  filename: string,
+  title: string,
+  description: string,
+  // ovnerId: string;
 }
 
 const isLoading = ref(false)

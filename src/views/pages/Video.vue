@@ -2,7 +2,7 @@
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">{{ video.title }}</h1>
     <p class="mb-4">{{ video.description }}</p>
-    <video :src="video.url" controls class="w-full"></video>
+    <video :src="`/uploads/${video.filename}`" controls class="w-full"></video>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const videoStore = useVideoStore()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const video = ref<any>({ title: '', description: '', url: '' })
+const video = ref({ filename: '', path: '', title: '', description: '' })
 
 onMounted(async () => {
   video.value = await videoStore.fetchVideo(route.params.id as string)

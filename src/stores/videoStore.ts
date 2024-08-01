@@ -15,8 +15,8 @@ export const useVideoStore = defineStore('video', {
       const response = await axios.get(`/videos/${id}`)
       return response.data
     },
-    async uploadVideo (title: string, description: string, url: string) {
-      await axios.post('/videos', { title, description, url })
+    async uploadVideo (formData: FormData) {
+      await axios.post('/videos/upload', formData)
       await this.fetchVideos()
     }
   }
