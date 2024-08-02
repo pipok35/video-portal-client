@@ -4,7 +4,7 @@
     <form class="space-y-4" @submit.prevent="login">
       <input v-model="email" type="text" placeholder="Email" class="border p-2 w-full" />
       <input v-model="password" type="password" placeholder="Password" class="border p-2 w-full" />
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Login</button>
+      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Войти</button>
     </form>
   </div>
 </template>

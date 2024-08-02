@@ -1,16 +1,36 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/pages/Home.vue'
-import Video from '../views/pages/Video.vue'
-import Register from '../views/pages/Register.vue'
-import Login from '../views/pages/Login.vue'
-import Upload from '../views/pages/Upload.vue'
+import { createRouter, createWebHistory, RouterView } from 'vue-router'
+import { h } from 'vue'
+
+const authRoutes = [
+  { name: 'register', path: '/register', component: () => import('@/views/pages/Register.vue'), meta: { layout: 'SimpleLayout' } },
+  { name: 'login', path: '/login', component: () => import('@/views/pages/Login.vue'), meta: { layout: 'SimpleLayout' } }
+]
+
+const videoRoutes = [
+  // { name: 'videos', path: '', component: ChannelsPage, meta: { layout: 'AppLayout' } },
+  { name: 'uploadVideo', path: 'upload', component: () => import('@/views/pages/Upload.vue'), meta: { layout: 'AppLayout' } },
+  { name: 'video', path: ':id', component: () => import('@/views/pages/Video.vue'), meta: { layout: 'AppLayout' } }
+]
+
+const channelRoutes = [
+  { name: 'channels', path: '', component: () => import('@/views/pages/ChannelsPage.vue'), meta: { layout: 'AppLayout' } },
+  { name: 'createChannel', path: 'create', component: () => import('@/views/pages/CreateChannelPage.vue'), meta: { layout: 'AppLayout' } },
+  { name: 'channel', path: ':id', component: () => import('@/views/pages/ChannelPage.vue'), meta: { layout: 'AppLayout' } }
+]
 
 const routes = [
-  { name: 'home', path: '/', component: Home, meta: { layout: 'AppLayout' } },
-  { name: 'video', path: '/video/:id', component: Video, meta: { layout: 'AppLayout' } },
-  { name: 'register', path: '/register', component: Register, meta: { layout: 'SimpleLayout' } },
-  { name: 'upload', path: '/upload', component: Upload, meta: { layout: 'AppLayout' } },
-  { name: 'login', path: '/login', component: Login, meta: { layout: 'SimpleLayout' } }
+  { name: 'home', path: '/', component: () => import('@/views/pages/Home.vue'), meta: { layout: 'AppLayout' } },
+  ...authRoutes,
+  {
+    path: '/videos',
+    component: { render: () => h(RouterView) },
+    children: videoRoutes
+  },
+  {
+    path: '/channels',
+    component: { render: () => h(RouterView) },
+    children: channelRoutes
+  }
 ]
 
 const router = createRouter({

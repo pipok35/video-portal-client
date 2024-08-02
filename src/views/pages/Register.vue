@@ -5,7 +5,7 @@
       <input v-model="username" type="text" placeholder="Username" class="border p-2 w-full" />
       <input v-model="email" type="email" placeholder="Email" class="border p-2 w-full" />
       <input v-model="password" type="password" placeholder="Password" class="border p-2 w-full" />
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Register</button>
+      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Зарегистрироваться</button>
     </form>
   </div>
 </template>

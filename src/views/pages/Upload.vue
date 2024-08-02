@@ -1,11 +1,13 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Upload Video</h1>
+    <h1 class="text-2xl font-bold mb-4">Загрузить видео</h1>
     <form class="space-y-4" @submit.prevent="upload">
-      <input v-model="title" type="text" placeholder="Title" class="border p-2 w-full" />
-      <input v-model="description" type="text" placeholder="Description" class="border p-2 w-full" />
-      <input type="file" @change="onFileChange" />
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Upload</button>
+      <div class="flex flex-col gap-2">
+        <input v-model="title" type="text" placeholder="Title" class="border p-2 w-full" />
+        <input v-model="description" type="text" placeholder="Description" class="border p-2 w-full" />
+        <input type="file" @change="onFileChange" />
+      </div>
+      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Загрузить</button>
     </form>
   </div>
 </template>

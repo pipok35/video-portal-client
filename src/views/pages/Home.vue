@@ -1,6 +1,5 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Welcome to YouTube App</h1>
     <div v-if="isLoading">Загрука...</div>
     <div v-else-if="videos.length === 0">Нет видео</div>
     <div v-else>
@@ -22,8 +21,7 @@ interface Video {
   _id: string,
   filename: string,
   title: string,
-  description: string,
-  // ovnerId: string;
+  description: string
 }
 
 const isLoading = ref(false)

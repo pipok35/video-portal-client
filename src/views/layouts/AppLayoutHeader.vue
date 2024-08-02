@@ -1,11 +1,16 @@
 <template>
   <header class="bg-blue-600 text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">YouTube App</h1>
-      <nav>
-        <router-link to="/" class="text-white mr-4">Home</router-link>
-        <router-link to="/upload" class="text-white">Upload Video</router-link>
-        <button class="ml-4 bg-red-500 text-white p-2 rounded" @click="logout">Logout</button>
+      <router-link :to="{ name: 'home' }" class="flex gap-2 items-center">
+        <img src="../../../public/logo.svg" alt="logo" width="30" height="30">
+        <h1 class="text-2xl font-bold">Video Portal</h1>
+      </router-link>
+      <nav class="flex gap-2 items-center text-white">
+        <router-link :to="{ name: 'home' }" class="hover:underline">Главная</router-link>
+        <router-link :to="{ name: 'channels' }" class="hover:underline">Мои каналы</router-link>
+        <router-link :to="{ name: 'uploadVideo' }" class="hover:underline">Загрузить видео</router-link>
+        <router-link :to="{ name: 'createChannel' }" class="hover:underline">Создать канал</router-link>
+        <button class="ml-4 bg-red-500 text-white p-2 rounded" @click="logout">Выйти</button>
       </nav>
     </div>
   </header>
