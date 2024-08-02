@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Login</h1>
+    <h1 class="text-2xl font-bold mb-4">Авторизация</h1>
     <form class="space-y-4" @submit.prevent="login">
       <input v-model="email" type="text" placeholder="Email" class="border p-2 w-full" />
       <input v-model="password" type="password" placeholder="Password" class="border p-2 w-full" />
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '../../stores/userStore'
+import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 
 const email = ref('')

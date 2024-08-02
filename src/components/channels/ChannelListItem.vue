@@ -8,11 +8,12 @@
 </template>
 
 <script setup lang="ts">
+import { Channel } from '@/interfaces/channel.interface'
 import { PropType } from 'vue'
 
 const props = defineProps({
   channel: {
-    type: Object as PropType<{ _id: string, title: string, description: string }>,
+    type: Object as PropType<Channel>,
     required: true
   }
 })

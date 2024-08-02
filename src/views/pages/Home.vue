@@ -6,7 +6,7 @@
       <h2 class="text-xl font-semibold mb-2">Видео:</h2>
       <ul>
         <li v-for="video in videos" :key="video._id" class="mb-2">
-          <router-link :to="{ path: `/video/${video._id}` }" class="text-blue-500">{{ video.title }}</router-link>
+          <router-link :to="{ name: 'video', params: { id: video._id }}" class="text-blue-500">{{ video.title }}</router-link>
         </li>
       </ul>
     </div>
@@ -15,14 +15,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useVideoStore } from '../../stores/videoStore'
-
-interface Video {
-  _id: string,
-  filename: string,
-  title: string,
-  description: string
-}
+import { useVideoStore } from '@/stores/videoStore'
+import { Video } from '@/interfaces/video.interface'
 
 const isLoading = ref(false)
 const videos = ref<Video[]>([])

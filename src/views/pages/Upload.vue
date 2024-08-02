@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useVideoStore } from '../../stores/videoStore'
+import { useVideoStore } from '@/stores/videoStore'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -40,7 +40,7 @@ const upload = async () => {
     try {
       const video = await videoStore.uploadVideo(formData)
 
-      router.push({ name: 'video', params: { id: video?.id } })
+      router.push({ name: 'video', params: { id: video._id } })
     } catch (error) {
       console.error(error)
     }

@@ -2,10 +2,10 @@
   <header class="bg-blue-600 text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
       <router-link :to="{ name: 'home' }" class="flex gap-2 items-center">
-        <img src="../../../public/logo.svg" alt="logo" width="30" height="30">
+        <img src="/logo.svg" alt="logo" width="30" height="30">
         <h1 class="text-2xl font-bold">Video Portal</h1>
       </router-link>
-      <nav class="flex gap-2 items-center text-white">
+      <nav class="flex gap-8 items-center text-white">
         <router-link :to="{ name: 'home' }" class="hover:underline">Главная</router-link>
         <router-link :to="{ name: 'channels' }" class="hover:underline">Мои каналы</router-link>
         <router-link :to="{ name: 'uploadVideo' }" class="hover:underline">Загрузить видео</router-link>

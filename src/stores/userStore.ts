@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { axios } from '../axiosConfig'
+import { axios } from '@/axiosConfig'
+import { User } from '@/interfaces/user.interface'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    user: null as any,
-    token: localStorage.getItem('token') || ''
+    user: null as User | null,
+    token: localStorage.getItem('token') || '' as string
   }),
   actions: {
     async login (email: string, password: string) {
@@ -20,11 +20,9 @@ export const useUserStore = defineStore('user', {
     },
     async fetchUser () {
       if (this.token) {
-        const response = await axios.get('/auth/me', {
-          headers: { Authorization: `Bearer ${this.token}` }
-        })
+        const response = await axios.get('/auth/me')
 
-        this.user = response.data
+        this.user = response.data as User
       }
     },
     logout () {

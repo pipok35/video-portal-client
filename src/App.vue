@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { axios } from './axiosConfig'
-import { useUserStore } from '../src/stores/userStore'
+import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()

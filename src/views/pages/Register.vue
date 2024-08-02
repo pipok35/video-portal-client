@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Register</h1>
+    <h1 class="text-2xl font-bold mb-4">Регистрация</h1>
     <form class="space-y-4" @submit.prevent="register">
       <input v-model="username" type="text" placeholder="Username" class="border p-2 w-full" />
       <input v-model="email" type="email" placeholder="Email" class="border p-2 w-full" />
@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '../../stores/userStore'
+import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 
 const username = ref('')

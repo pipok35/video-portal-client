@@ -8,13 +8,16 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useVideoStore } from '../../stores/videoStore'
+import { useVideoStore } from '@/stores/videoStore'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const videoStore = useVideoStore()
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const video = ref({ filename: '', path: '', title: '', description: '' })
+const video = ref<{title: string, description: string, filename: string}>({
+  title: '',
+  description: '',
+  filename: ''
+})
 
 onMounted(async () => {
   video.value = await videoStore.fetchVideo(route.params.id as string)
