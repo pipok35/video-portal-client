@@ -7,8 +7,12 @@ export const useFilesStore = defineStore('files', {
     files: [] as Video[]
   }),
   actions: {
-    async upload (formData: FormData): Promise<{ name: string; url: string }> {
-      const response = await axios.post('/files/upload', formData)
+    async upload (formData: FormData, type: string): Promise<{ name: string; url: string }> {
+      const response = await axios.post('/files/upload', formData, {
+        params: {
+          type
+        }
+      })
 
       return response.data
     }

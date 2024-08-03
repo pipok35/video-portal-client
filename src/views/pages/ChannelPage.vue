@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useChannelStore } from '@/stores/channelStore'
+import { useChannelStore } from '@/stores/channels'
 import { Channel } from '@/interfaces/channel.interface'
 
 const route = useRoute()

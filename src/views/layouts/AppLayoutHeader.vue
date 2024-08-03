@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores/userStore'
+import { useUserStore } from '@/stores/users'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()

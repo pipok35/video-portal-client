@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useVideoStore } from '@/stores/videoStore'
-import { useFilesStore } from '@/stores/filesStore'
+import { useVideoStore } from '@/stores/videos'
+import { useFilesStore } from '@/stores/files'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -43,7 +43,7 @@ const uploadFile = async (file: File) => {
     formData.append('file', file)
 
     try {
-      video = await filesStore.upload(formData)
+      video = await filesStore.upload(formData, 'videos')
     } catch (error) {
       console.error(error)
     }

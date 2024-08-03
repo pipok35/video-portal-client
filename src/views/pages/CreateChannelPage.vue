@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useChannelStore } from '@/stores/channelStore'
+import { useChannelStore } from '@/stores/channels'
 import { useRouter } from 'vue-router'
 
 const title = ref('')

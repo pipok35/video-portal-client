@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useChannelStore } from '@/stores/channelStore'
+import { useChannelStore } from '@/stores/channels'
 import ChannelList from '@/components/channels/ChannelsList.vue'
 import { Channel } from '@/interfaces/channel.interface'
 

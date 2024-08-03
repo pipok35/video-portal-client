@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useVideoStore } from '@/stores/videoStore'
+import { useVideoStore } from '@/stores/videos'
 import { Video } from '@/interfaces/video.interface'
 
 const isLoading = ref(false)
