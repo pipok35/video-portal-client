@@ -9,12 +9,10 @@
 
 <script setup lang="ts">
 import { Channel } from '@/interfaces/channel'
-import { PropType } from 'vue'
 
-const props = defineProps({
-  channel: {
-    type: Object as PropType<Channel>,
-    required: true
-  }
-})
+interface Props {
+  channel: Channel;
+}
+
+const props = defineProps<Props>()
 </script>

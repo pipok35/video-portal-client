@@ -11,14 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
 import { Channel } from '@/interfaces/channel'
 import ChannelListItem from '@/components/channels/ChannelListItem.vue'
 
-const props = defineProps({
-  channels: {
-    type: Array as PropType<Channel[]>,
-    required: true
-  }
-})
+interface Props {
+  channels: Channel[];
+}
+
+const props = defineProps<Props>()
 </script>
