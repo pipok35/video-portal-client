@@ -8,7 +8,7 @@ const authRoutes = [
 
 const videoRoutes = [
   // { name: 'videos', path: '', component: ChannelsPage, meta: { layout: 'AppLayout' } },
-  { name: 'uploadVideo', path: 'upload', component: () => import('@/views/pages/Upload.vue'), meta: { layout: 'AppLayout' } },
+  { name: 'createVideo', path: 'create', component: () => import('@/views/pages/CreateVideo.vue'), meta: { layout: 'AppLayout' } },
   { name: 'video', path: ':id', component: () => import('@/views/pages/Video.vue'), meta: { layout: 'AppLayout' } }
 ]
 

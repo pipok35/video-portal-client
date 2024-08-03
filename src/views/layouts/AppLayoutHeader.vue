@@ -8,7 +8,7 @@
       <nav class="flex gap-8 items-center text-white">
         <router-link :to="{ name: 'home' }" class="hover:underline">Главная</router-link>
         <router-link :to="{ name: 'channels' }" class="hover:underline">Мои каналы</router-link>
-        <router-link :to="{ name: 'uploadVideo' }" class="hover:underline">Загрузить видео</router-link>
+        <router-link :to="{ name: 'createVideo' }" class="hover:underline">Загрузить видео</router-link>
         <router-link :to="{ name: 'createChannel' }" class="hover:underline">Создать канал</router-link>
         <button class="ml-4 bg-red-500 text-white p-2 rounded" @click="logout">Выйти</button>
       </nav>

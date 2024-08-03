@@ -2,7 +2,7 @@
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">{{ video.title }}</h1>
     <p class="mb-4">{{ video.description }}</p>
-    <video :src="`/uploads/${video.filename}`" controls class="w-full"></video>
+    <video :src="`/uploads/videos/${video.filename}`" controls class="w-full"></video>
   </div>
 </template>
 
@@ -13,9 +13,10 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const videoStore = useVideoStore()
-const video = ref<{title: string, description: string, filename: string}>({
+const video = ref<{title: string, description: string, url: string, filename: string}>({
   title: '',
   description: '',
+  url: '',
   filename: ''
 })
 
