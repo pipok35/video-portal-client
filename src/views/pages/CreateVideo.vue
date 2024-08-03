@@ -17,17 +17,28 @@ import { ref } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { useFilesStore } from '@/stores/files'
 import { useRouter } from 'vue-router'
+import { FileResponse } from '@/interfaces/file-response'
 
 const router = useRouter()
-let video = {
-  url: '',
-  name: ''
-}
+let videoFile: FileResponse
 const title = ref('')
 const description = ref('')
 const videoStore = useVideoStore()
 const filesStore = useFilesStore()
 let selectedFile: File | null = null
+
+const uploadFile = async (file: File) => {
+  if (file) {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      videoFile = await filesStore.upload(formData, 'videos')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 function handleSelect (event: Event) {
   const target = event.target as HTMLInputElement
@@ -37,23 +48,15 @@ function handleSelect (event: Event) {
   }
 }
 
-const uploadFile = async (file: File) => {
-  if (file) {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    try {
-      video = await filesStore.upload(formData, 'videos')
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
-
 const create = async () => {
   try {
-    const id = await videoStore.create({ url: video.url, filename: video.name, title: title.value, description: description.value })
-    console.log(id)
+    const id = await videoStore.create({
+      title: title.value,
+      description: description.value,
+      url: videoFile.url,
+      filename: videoFile.name
+    })
+
     router.push({ name: 'video', params: { id } })
   } catch (error) {
     console.error(error)

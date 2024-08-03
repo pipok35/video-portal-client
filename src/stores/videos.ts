@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { axios } from '@/axiosConfig'
 import { Video } from '@/interfaces/video'
+import { CreateVideDto } from '@/dto/create-video'
 
 export const useVideoStore = defineStore('video', {
   state: () => ({
@@ -15,7 +16,7 @@ export const useVideoStore = defineStore('video', {
       const response = await axios.get(`/videos/${id}`)
       return response.data
     },
-    async create (data: { url: string, filename: string, title: string, description: string }): Promise<string> {
+    async create (data: CreateVideDto): Promise<string> {
       const response = await axios.post('/videos/create', data)
       await this.fetchVideos()
 
