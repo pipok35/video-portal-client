@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Channel } from '@/interfaces/channel.interface'
+import { Channel } from '@/interfaces/channel'
 import { PropType } from 'vue'
 
 const props = defineProps({

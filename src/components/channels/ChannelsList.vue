@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { Channel } from '@/interfaces/channel.interface'
+import { Channel } from '@/interfaces/channel'
 import ChannelListItem from '@/components/channels/ChannelListItem.vue'
 
 const props = defineProps({

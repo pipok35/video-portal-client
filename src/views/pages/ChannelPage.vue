@@ -14,7 +14,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useChannelStore } from '@/stores/channels'
-import { Channel } from '@/interfaces/channel.interface'
+import { Channel } from '@/interfaces/channel'
 
 const route = useRoute()
 const channelStore = useChannelStore()

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { axios } from '@/axiosConfig'
-import { Video } from '@/interfaces/video.interface'
+import { Video } from '@/interfaces/video'
 
 export const useFilesStore = defineStore('files', {
   state: () => ({
