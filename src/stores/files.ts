@@ -15,6 +15,11 @@ export const useFilesStore = defineStore('files', {
       })
 
       return response.data
+    },
+    async download (fileId: string) {
+      const response = await axios.get(`/files/${fileId}/download`)
+
+      return response.data
     }
   }
 })
