@@ -8,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { Channel } from '@/interfaces/channel'
+import { IChannel } from '@/interfaces/channel'
 
 interface Props {
-  channel: Channel;
+  channel: IChannel;
 }
 
 const props = defineProps<Props>()

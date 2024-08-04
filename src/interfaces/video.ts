@@ -1,11 +1,18 @@
-export interface Video {
+export interface IVideo {
     _id: string,
     title: string,
     description: string,
-    filename: string,
-    url: string,
-    createdAt: Date,
-    createdBy: string,
-    updatedAt: Date,
-    updatedBy: string
+    file: string,
+    created: {
+        by: string,
+        at: Date
+    },
+    updated?: {
+        by: string,
+        at: Date
+    },
+    deleted?: {
+        by: string,
+        at: Date
+    }
 }

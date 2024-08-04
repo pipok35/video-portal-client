@@ -17,11 +17,11 @@ import { ref } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { useFilesStore } from '@/stores/files'
 import { useRouter } from 'vue-router'
-import { FileResponse } from '@/interfaces/file-response'
+import { IFile } from '@/interfaces/file'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 const router = useRouter()
-let videoFile: FileResponse
+let videoFile: IFile
 const title = ref('')
 const description = ref('')
 const videoStore = useVideoStore()
@@ -51,8 +51,7 @@ const create = async () => {
     const id = await videoStore.create({
       title: title.value,
       description: description.value,
-      url: videoFile.url,
-      filename: videoFile.name
+      file: videoFile._id
     })
 
     router.push({ name: 'video', params: { id } })

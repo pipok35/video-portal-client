@@ -9,10 +9,10 @@
 import { onMounted, ref } from 'vue'
 import { useChannelStore } from '@/stores/channels'
 import ChannelList from '@/components/channels/ChannelsList.vue'
-import { Channel } from '@/interfaces/channel'
+import { IChannel } from '@/interfaces/channel'
 
 const channelStore = useChannelStore()
-const channels = ref<Channel[]>([])
+const channels = ref<IChannel[]>([])
 
 onMounted(async () => {
   await channelStore.fetchChannels()

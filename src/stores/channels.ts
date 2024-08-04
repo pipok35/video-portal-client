@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
 import { axios } from '@/axiosConfig'
-import { Channel } from '@/interfaces/channel'
+import { IChannel } from '@/interfaces/channel'
 
 export const useChannelStore = defineStore('channel', {
   state: () => ({
-    channels: [] as Channel[]
+    channels: [] as IChannel[]
   }),
   actions: {
     async fetchChannels () {
       const response = await axios.get('/channels')
       this.channels = response.data
     },
-    async fetchChannel (id: string): Promise <Channel> {
+    async fetchChannel (id: string): Promise <IChannel> {
       const response = await axios.get(`/channels/${id}`)
       return response.data
     },

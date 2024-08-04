@@ -16,10 +16,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useVideoStore } from '@/stores/videos'
-import { Video } from '@/interfaces/video.interface'
+import { IVideo } from '@/interfaces/video.interface'
 
 const isLoading = ref(false)
-const videos = ref<Video[]>([])
+const videos = ref<IVideo[]>([])
 const videoStore = useVideoStore()
 
 onMounted(async () => {

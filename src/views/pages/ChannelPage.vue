@@ -14,11 +14,11 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useChannelStore } from '@/stores/channels'
-import { Channel } from '@/interfaces/channel'
+import { IChannel } from '@/interfaces/channel'
 
 const route = useRoute()
 const channelStore = useChannelStore()
-const channel = ref<Channel | null>(null)
+const channel = ref<IChannel | null>(null)
 
 onMounted(async () => {
   const data = await channelStore.fetchChannel(route.params.id as string)

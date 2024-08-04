@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
 import { axios } from '@/axiosConfig'
-import { Video } from '@/interfaces/video'
+import { IVideo } from '@/interfaces/video'
 import { CreateVideDto } from '@/dto/create-video'
 
 export const useVideoStore = defineStore('video', {
   state: () => ({
-    videos: [] as Video[]
+    videos: [] as IVideo[]
   }),
   actions: {
     async fetchVideos () {
       const response = await axios.get('/videos')
-      this.videos = response.data as Video[]
+      this.videos = response.data as IVideo[]
     },
-    async fetchVideo (id: string): Promise<Video> {
+    async fetchVideo (id: string): Promise<IVideo> {
       const response = await axios.get(`/videos/${id}`)
       return response.data
     },

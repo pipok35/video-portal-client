@@ -7,20 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import qs from 'qs'
 import { ref, onMounted, computed } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { useRoute } from 'vue-router'
 import { useApiUrl } from '@/useApiUrl'
-import { Video } from '@/interfaces/video'
+import { IVideo } from '@/interfaces/video'
 
 const apiUrl = useApiUrl()
 const route = useRoute()
 const videoStore = useVideoStore()
-const video = ref<Video | null>(null)
+const video = ref<IVideo | null>(null)
 
 const videoUrl = computed(() => {
-  return video.value ? `${apiUrl}/files/download?${qs.stringify({ url: video.value.url })}` : ''
+  return video.value ? `${apiUrl}/files/${video.value.file}/download` : ''
 })
 
 onMounted(async () => {

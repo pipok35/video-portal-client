@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import { Channel } from '@/interfaces/channel'
+import { IChannel } from '@/interfaces/channel'
 import ChannelListItem from '@/components/channels/ChannelListItem.vue'
 
 interface Props {
-  channels: Channel[];
+  channels: IChannel[];
 }
 
 const props = defineProps<Props>()
