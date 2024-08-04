@@ -26,6 +26,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const files = ref<File[]>([])
+const newFiles = ref<File[]>([])
 const fileInput = ref<HTMLInputElement | null>(null)
 const emit = defineEmits(['files-added'])
 
@@ -56,16 +57,20 @@ const onPaste = (event: ClipboardEvent) => {
   }
 }
 
-const addFiles = (newFiles: File[]) => {
+const addFiles = (incomingFiles: File[]) => {
   if (props.multiple) {
-    files.value = [...files.value, ...newFiles]
+    const existingFileNames = files.value.map(file => file.name)
+    const filteredNewFiles = incomingFiles.filter(file => !existingFileNames.includes(file.name))
+    files.value = [...files.value, ...filteredNewFiles]
+    newFiles.value = filteredNewFiles
   } else {
-    files.value = newFiles
+    files.value = incomingFiles
+    newFiles.value = incomingFiles
   }
 }
 
 const emitFiles = () => {
-  emit('files-added', files.value)
+  emit('files-added', newFiles.value)
 }
 
 watch(files, emitFiles)
