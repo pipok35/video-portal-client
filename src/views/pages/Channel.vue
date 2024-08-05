@@ -1,6 +1,5 @@
 <template>
-  fdsfsfsfsf
-  <div>
+  <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">{{ channel?.title }}</h1>
     <p>{{ channel?.description }}</p>
     <div class="flex gap-2">

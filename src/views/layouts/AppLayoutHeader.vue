@@ -10,7 +10,7 @@
         <router-link v-if="route.meta.layout === 'SimpleLayout' && route.name !== 'register'" to="/register" class="text-white">Зарегистрироваться</router-link>
         <router-link v-if="route.meta.layout === 'AppLayout' && route.name !== 'home'" :to="{ name: 'home' }" class="hover:underline">Главная</router-link>
         <router-link v-if="route.meta.layout === 'AppLayout'" :to="{ name: 'profile' }" class="hover:underline">Профиль</router-link>
-        <button class="ml-4 bg-red-500 text-white p-2 rounded" @click="logout">Выйти</button>
+        <button v-if="route.meta.layout === 'AppLayout'" class="ml-4 bg-red-500 text-white p-2 rounded" @click="logout">Выйти</button>
       </nav>
     </div>
   </header>

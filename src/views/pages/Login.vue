@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-4">Авторизация</h1>
-    <form class="space-y-4" @submit.prevent="login">
-      <input v-model="email" type="text" placeholder="Email" class="border p-2 w-full" />
-      <input v-model="password" type="password" placeholder="Password" class="border p-2 w-full" />
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Войти</button>
-    </form>
+  <div class="flex flex-col items-center justify-center h-full">
+    <div class="w-1/4">
+      <BaseCard title="Авторизация">
+        <form class="flex flex-col gap-2" @submit.prevent="login">
+          <span>E-mail</span>
+          <input v-model="email" type="text" placeholder="E-mail" class="border p-2 w-full" />
+          <span>Пароль</span>
+          <input v-model="password" type="password" placeholder="Пароль" class="border p-2 w-full" />
+          <button type="submit" class="bg-gray-800 text-white p-2 rounded">Войти</button>
+        </form>
+      </BaseCard>
+    </div>
   </div>
 </template>
 

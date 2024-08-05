@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4">
     <div v-if="isLoading">Загрука...</div>
     <div v-else-if="videos.length === 0">Нет видео</div>
     <div v-else>

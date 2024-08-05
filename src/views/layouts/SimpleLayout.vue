@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col">
+  <div class="h-screen flex flex-col">
     <AppLayoutHeader />
-    <main class="h-screen p-4">
+    <main class="grow">
       <router-view />
     </main>
   </div>

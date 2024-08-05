@@ -1,8 +1,10 @@
 <template>
-  <AppLayoutHeader />
-  <main class="h-screen p-4">
-    <router-view v-if="userStore.user?._id"></router-view>
-  </main>
+  <div class="h-screen flex flex-col">
+    <AppLayoutHeader />
+    <main class="grow">
+      <router-view v-if="userStore.user?._id"></router-view>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">

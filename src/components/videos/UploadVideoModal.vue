@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-4">Загрузить видео</h1>
-    <form class="space-y-4" @submit.prevent="create">
-      <div class="flex flex-col gap-2">
-        <input v-model="title" type="text" placeholder="Title" class="border p-2 w-full" />
-        <input v-model="description" type="text" placeholder="Description" class="border p-2 w-full" />
-        <BaseFileUpload multiple @files-added="handleSelect" />
-      </div>
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">Загрузить</button>
-    </form>
-  </div>
+  <BaseModal title="Загрузить видео" width="400px">
+    <div>
+      <form class="space-y-4" @submit.prevent="create">
+        <div class="flex flex-col gap-2">
+          <input v-model="title" type="text" placeholder="Название" class="border p-2 w-full" />
+          <input v-model="description" type="text" placeholder="Описание" class="border p-2 w-full" />
+          <BaseFileUpload multiple @files-added="handleSelect" />
+        </div>
+        <button type="submit" class="bg-gray-800 text-white p-2 rounded">Загрузить</button>
+      </form>
+    </div>
+  </BaseModal>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +19,6 @@ import { useVideoStore } from '@/stores/videos'
 import { useFilesStore } from '@/stores/files'
 import { useRouter } from 'vue-router'
 import { IFile } from '@/interfaces/file'
-import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 const router = useRouter()
 let videoFile: IFile

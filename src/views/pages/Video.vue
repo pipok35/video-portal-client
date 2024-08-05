@@ -1,5 +1,5 @@
 <template>
-  <div v-if="video">
+  <div v-if="video" class="p-4">
     <h1 class="text-2xl font-bold mb-4">{{ video.title }}</h1>
     <p class="mb-4">{{ video.description }}</p>
     <video :src="videoUrl" controls class="w-full"></video>

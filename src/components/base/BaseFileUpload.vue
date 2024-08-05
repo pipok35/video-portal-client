@@ -6,7 +6,7 @@
     @paste.prevent="onPaste"
   >
     <input ref="fileInput" type="file" class="hidden" :multiple="props.multiple" @change="onFileChange" />
-    <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-2" @click="onBrowseFiles">
+    <button type="button" class="bg-gray-800 text-white px-4 py-2 rounded-md mb-2" @click="onBrowseFiles">
       Выбрать файл
     </button>
     <p class="text-gray-500">Или перетащите файл сюда</p>
