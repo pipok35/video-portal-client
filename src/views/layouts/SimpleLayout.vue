@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <SimpleLayoutHeader />
-    <main>
+  <div class="flex flex-col">
+    <AppLayoutHeader />
+    <main class="h-screen p-4">
       <router-view />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import SimpleLayoutHeader from '@/views/layouts/SimpleLayoutHeader.vue'
+import AppLayoutHeader from '@/views/layouts/AppLayoutHeader.vue'
 </script>

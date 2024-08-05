@@ -1,7 +1,7 @@
 <template>
-  <component :is="$route.meta.layout">
-    <router-view></router-view>
-  </component>
+  <div class="bg-neutral-100">
+    <component :is="$route.meta.layout"></component>
+  </div>
 </template>
 
 <script setup lang="ts">

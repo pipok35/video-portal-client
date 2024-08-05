@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <h1 class="text-2xl font-bold mb-4">Регистрация</h1>
     <form class="space-y-4" @submit.prevent="register">
       <input v-model="username" type="text" placeholder="Username" class="border p-2 w-full" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <h1 class="text-2xl font-bold mb-4">Загрузить видео</h1>
     <form class="space-y-4" @submit.prevent="create">
       <div class="flex flex-col gap-2">

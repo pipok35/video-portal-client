@@ -7,19 +7,30 @@ const authRoutes = [
 ]
 
 const videoRoutes = [
-  // { name: 'videos', path: '', component: ChannelsPage, meta: { layout: 'AppLayout' } },
+  { name: 'videos', path: '', component: () => import('@/views/pages/Videos.vue'), meta: { layout: 'AppLayout' } },
   { name: 'createVideo', path: 'create', component: () => import('@/views/pages/CreateVideo.vue'), meta: { layout: 'AppLayout' } },
   { name: 'video', path: ':id', component: () => import('@/views/pages/Video.vue'), meta: { layout: 'AppLayout' } }
 ]
 
 const channelRoutes = [
-  { name: 'channels', path: '', component: () => import('@/views/pages/ChannelsPage.vue'), meta: { layout: 'AppLayout' } },
+  { name: 'channels', path: '', component: () => import('@/views/pages/Channels.vue'), meta: { layout: 'AppLayout' } },
   { name: 'createChannel', path: 'create', component: () => import('@/views/pages/CreateChannelPage.vue'), meta: { layout: 'AppLayout' } },
-  { name: 'channel', path: ':id', component: () => import('@/views/pages/ChannelPage.vue'), meta: { layout: 'AppLayout' } }
+  { name: 'channel', path: ':id', component: () => import('@/views/pages/Channel.vue'), meta: { layout: 'AppLayout' } }
 ]
 
 const routes = [
-  { name: 'home', path: '/', component: () => import('@/views/pages/Home.vue'), meta: { layout: 'AppLayout' } },
+  {
+    name: 'home',
+    path: '/',
+    component: () => import('@/views/pages/Home.vue'),
+    meta: { layout: 'AppLayout' }
+  },
+  {
+    name: 'profile',
+    path: '/profile',
+    component: () => import('@/views/pages/Profile.vue'),
+    meta: { layout: 'AppLayout' }
+  },
   ...authRoutes,
   {
     path: '/videos',

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <h1 class="text-2xl font-bold mb-4">Мои каналы</h1>
     <ChannelList :channels="channels" />
   </div>

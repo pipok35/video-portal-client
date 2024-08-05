@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <h1 class="text-2xl font-bold mb-4">Авторизация</h1>
     <form class="space-y-4" @submit.prevent="login">
       <input v-model="email" type="text" placeholder="Email" class="border p-2 w-full" />

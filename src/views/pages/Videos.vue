@@ -3,7 +3,7 @@
     <div v-if="isLoading">Загрука...</div>
     <div v-else-if="videos.length === 0">Нет видео</div>
     <div v-else>
-      <h2 class="text-xl font-semibold mb-2">Рекомендации</h2>
+      <h2 class="text-xl font-semibold mb-2">Мои видео</h2>
       <ul>
         <li v-for="video in videos" :key="video._id" class="mb-2">
           <router-link :to="{ name: 'video', params: { id: video._id }}" class="text-blue-500">{{ video.title }}</router-link>
