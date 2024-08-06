@@ -57,7 +57,6 @@ const emit = defineEmits(['click'])
 <style lang="less" scoped>
 .button {
   @apply
-    w-full
     inline-flex justify-center items-center
     rounded
     outline-none

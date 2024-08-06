@@ -3,9 +3,9 @@
     <form @submit.prevent="create">
       <div class="flex flex-col gap-2">
         <span>Название</span>
-        <input v-model="title" type="text" placeholder="Название" class="border p-2 w-full" />
+        <BaseInput v-model="title" type="text" placeholder="Название" />
         <span>Описание</span>
-        <input v-model="description" type="text" placeholder="Описание" class="border p-2 w-full" />
+        <BaseInput v-model="description" type="text" placeholder="Описание" />
         <BaseFileUpload multiple @files-added="handleSelect" />
         <BaseButton>Загрузить</BaseButton>
       </div>

@@ -3,9 +3,9 @@
     <form @submit.prevent="createChannel">
       <div class="flex flex-col gap-2">
         <span class="block text-gray-700">Название</span>
-        <input v-model="title" type="text" class="border p-2 w-full" required />
+        <BaseInput v-model="title" type="text" />
         <label class="block text-gray-700">Описание</label>
-        <textarea v-model="description" class="border p-2 w-full" required></textarea>
+        <textarea v-model="description" class="border p-2 w-full"></textarea>
         <BaseButton>Создать</BaseButton>
       </div>
     </form>

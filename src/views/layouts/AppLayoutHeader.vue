@@ -6,11 +6,21 @@
         <h1 class="text-2xl font-bold">Video Portal</h1>
       </router-link>
       <nav>
-        <BaseButton v-if="route.meta.layout === 'SimpleLayout' && route.name !== 'login'" color="red">
-          <router-link to="/login" class="text-white">Войти</router-link>
+        <BaseButton
+          v-if="route.meta.layout === 'SimpleLayout' && route.name !== 'login'"
+          type="router-link"
+          to="/login"
+          color="red"
+        >
+          Войти
         </BaseButton>
-        <BaseButton v-if="route.meta.layout === 'SimpleLayout' && route.name !== 'register'" color="red">
-          <router-link to="/register" class="text-white">Зарегистрироваться</router-link>
+        <BaseButton
+          v-if="route.meta.layout === 'SimpleLayout' && route.name !== 'register'"
+          type="router-link"
+          to="/register"
+          color="red"
+        >
+          Зарегистрироваться
         </BaseButton>
         <div v-if="route.meta.layout === 'AppLayout'" class="flex gap-2">
           <router-link :to="{ name: 'profile' }" class="p-2"><v-icon name="fa-user-circle" scale="1.5"></v-icon></router-link>

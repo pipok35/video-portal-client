@@ -14,6 +14,7 @@ import BaseCard from '@/components/base/BaseCard.vue'
 import BaseModal from '@/components/base/BaseModal.vue'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
+import BaseInput from '@/components/base/BaseInput.vue'
 
 addIcons(IoExitOutline, IoCloseOutline, FaUserCircle)
 
@@ -30,5 +31,6 @@ app.component('BaseCard', BaseCard)
 app.component('BaseModal', BaseModal)
 app.component('BaseFileUpload', BaseFileUpload)
 app.component('BaseButton', BaseButton)
+app.component('BaseInput', BaseInput)
 
 app.mount('#app')

@@ -4,9 +4,9 @@
       <BaseCard title="Авторизация">
         <form class="flex flex-col gap-2 mt-2" @submit.prevent="login">
           <span>E-mail</span>
-          <input v-model="email" type="text" placeholder="E-mail" class="border p-2 w-full" />
+          <BaseInput v-model="email" type="text" placeholder="E-mail" />
           <span>Пароль</span>
-          <input v-model="password" type="password" placeholder="Пароль" class="border p-2 w-full" />
+          <BaseInput v-model="password" type="password" placeholder="Пароль" />
           <BaseButton @click="login">Войти</BaseButton>
         </form>
       </BaseCard>
