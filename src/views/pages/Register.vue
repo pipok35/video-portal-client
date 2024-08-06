@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center h-full">
     <div class="w-1/4">
       <BaseCard title="Регистрация">
-        <form class="flex flex-col gap-2" @submit.prevent="register">
+        <form class="flex flex-col gap-2 mt-2" @submit.prevent="register">
           <span>Имя пользователя</span>
           <input v-model="username" type="text" placeholder="Имя пользователя" class="border p-2 w-full" />
           <span>E-mail</span>

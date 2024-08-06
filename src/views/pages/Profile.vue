@@ -4,8 +4,8 @@
   <div class="grid grid-cols-12 grid-rows-2 h-full gap-2 p-4">
     <div class="col-span-2 row-span-2">
       <BaseCard>
-        <BaseButton color="inherit" size="large"><router-link :to="{ name: 'videos' }">Мои видео</router-link></BaseButton>
-        <BaseButton color="inherit" size="large"><router-link :to="{ name: 'channels' }">Мои каналы</router-link></BaseButton>
+        <BaseButton type="router-link" :to="{ name: 'videos' }" color="inherit" size="large">Мои видео</BaseButton>
+        <BaseButton type="router-link" :to="{ name: 'channels' }" color="inherit" size="large">Мои каналы</BaseButton>
         <BaseButton color="inherit" size="large" @click="isShowUploadVideoModal = true">Загрузить видео</BaseButton>
         <BaseButton color="inherit" size="large" @click="isShowCreateChannelModal = true">Создать канал</BaseButton>
       </BaseCard>

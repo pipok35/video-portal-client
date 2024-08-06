@@ -1,7 +1,12 @@
 <template>
-  <div
+  <component
+    :is="component"
     class="button"
     :class="[props.color, props.size, props.disabled ? 'disabled': null, props.leftIcon ? 'left-icon' : null, props.rightIcon ? 'right-icon' : null]"
+    :href="component === 'a' ? href : null"
+    :target="component === 'a' && blank ? '_blank' : null"
+    :to="component === 'router-link' ? to : null"
+    :type="component === 'button' ? type : null"
     @click="emit('click')"
   >
     <v-icon v-if="props.leftIcon" :icon="props.leftIcon" class="mr-2" />
@@ -9,23 +14,40 @@
       <slot></slot>
     </span>
     <v-icon v-if="props.rightIcon" :name="props.rightIcon" class="ml-2" />
-  </div>
+  </component>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 
 interface Props {
-    color?: string
-    size?: string
-    disabled?: boolean
-    leftIcon?: string
-    rightIcon?: string
+  color?: string
+  size?: string
+  disabled?: boolean
+  leftIcon?: string
+  rightIcon?: string
+  type?: string
+  href?: string
+  to?: string
+  blank?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'base',
   disabled: false,
-  size: 'medium'
+  size: 'medium',
+  type: 'button',
+  blank: false
+})
+
+const component = computed(() => {
+  if (props.type === 'link') {
+    return 'a'
+  } else if (props.type === 'router-link') {
+    return 'router-link'
+  } else {
+    return 'button'
+  }
 })
 
 const emit = defineEmits(['click'])

@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center h-full">
     <div class="w-1/4">
       <BaseCard title="Авторизация">
-        <form class="flex flex-col gap-2" @submit.prevent="login">
+        <form class="flex flex-col gap-2 mt-2" @submit.prevent="login">
           <span>E-mail</span>
           <input v-model="email" type="text" placeholder="E-mail" class="border p-2 w-full" />
           <span>Пароль</span>
