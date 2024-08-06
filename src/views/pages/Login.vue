@@ -1,13 +1,13 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-full">
+  <div class="flex items-center justify-center min-h-screen">
     <div class="w-1/4">
       <BaseCard title="Авторизация">
-        <form class="flex flex-col gap-2 mt-2" @submit.prevent="login">
-          <span>E-mail</span>
-          <BaseInput v-model="email" type="text" placeholder="E-mail" />
-          <span>Пароль</span>
-          <BaseInput v-model="password" type="password" placeholder="Пароль" />
-          <BaseButton @click="login">Войти</BaseButton>
+        <form class="flex flex-col gap-3 p-4" @submit.prevent="login">
+          <span class="text-xl">E-mail</span>
+          <BaseInput v-model="email" size="large" placeholder="E-mail" />
+          <span class="text-xl">Пароль</span>
+          <BaseInput v-model="password" size="large" type="password" placeholder="Пароль" />
+          <BaseButton color="red" size="large" @click="login">Войти</BaseButton>
         </form>
       </BaseCard>
     </div>

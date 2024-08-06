@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen overflow-auto flex flex-col">
     <AppLayoutHeader />
     <main class="grow">
       <router-view v-if="userStore.user?._id"></router-view>

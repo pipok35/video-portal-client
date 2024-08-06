@@ -1,9 +1,9 @@
 <template>
-  <header class="bg-layout text-white p-4">
+  <header class="bg-layout p-4">
     <div class="flex justify-between items-center">
-      <router-link :to="{ name: 'home' }" class="flex gap-2 items-center">
-        <img src="/logo.svg" alt="logo" width="30" height="30">
-        <h1 class="text-2xl font-bold">Video Portal</h1>
+      <router-link :to="{ name: 'home' }" class="flex gap-2">
+        <img src="/logo.svg" alt="logo" width="40" height="40">
+        <span class="text-3xl font-bold">Video Portal</span>
       </router-link>
       <nav>
         <BaseButton
@@ -11,6 +11,7 @@
           type="router-link"
           to="/login"
           color="red"
+          size="large"
         >
           Войти
         </BaseButton>
@@ -19,12 +20,13 @@
           type="router-link"
           to="/register"
           color="red"
+          size="large"
         >
           Зарегистрироваться
         </BaseButton>
-        <div v-if="route.meta.layout === 'AppLayout'" class="flex gap-2">
-          <router-link :to="{ name: 'profile' }" class="p-2"><v-icon name="fa-user-circle" scale="1.5"></v-icon></router-link>
-          <BaseButton color="red" right-icon="io-exit-outline" @click="logout">Выйти</BaseButton>
+        <div v-if="route.meta.layout === 'AppLayout'" class="flex gap-2 items-center">
+          <router-link :to="{ name: 'profile' }"><v-icon name="fa-user-circle" scale="2.5"></v-icon></router-link>
+          <BaseButton color="red" size="large" right-icon="io-exit-outline" @click="logout">Выйти</BaseButton>
         </div>
       </nav>
     </div>

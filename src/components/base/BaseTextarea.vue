@@ -27,7 +27,7 @@ const model = defineModel<string>()
   }
 
   > .textarea {
-    @apply w-full px-4 bg-transparent outline-none;
+    @apply w-full px-4 py-2 bg-transparent outline-none;
   }
 }
 </style>

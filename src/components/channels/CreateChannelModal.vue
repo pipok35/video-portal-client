@@ -3,10 +3,10 @@
     <form @submit.prevent="createChannel">
       <div class="flex flex-col gap-2">
         <span>Название</span>
-        <BaseInput v-model="title" type="text" />
+        <BaseInput v-model="title" placeholder="Название" />
         <span>Описание</span>
-        <baseTextarea v-model="description"></baseTextarea>
-        <BaseButton>Создать</BaseButton>
+        <BaseTextarea v-model="description" placeholder="Описание"></BaseTextarea>
+        <BaseButton @click="createChannel">Создать</BaseButton>
       </div>
     </form>
   </BaseModal>

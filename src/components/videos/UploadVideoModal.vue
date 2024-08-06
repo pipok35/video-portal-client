@@ -3,11 +3,11 @@
     <form @submit.prevent="create">
       <div class="flex flex-col gap-2">
         <span>Название</span>
-        <BaseInput v-model="title" type="text" placeholder="Название" />
+        <BaseInput v-model="title" placeholder="Название" />
         <span>Описание</span>
-        <BaseTextarea v-model="description" type="text" placeholder="Описание" />
+        <BaseTextarea v-model="description" placeholder="Описание" />
         <BaseFileUpload multiple @files-added="handleSelect" />
-        <BaseButton>Загрузить</BaseButton>
+        <BaseButton @click="create">Загрузить</BaseButton>
       </div>
     </form>
   </BaseModal>

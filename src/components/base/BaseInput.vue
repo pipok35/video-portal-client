@@ -5,6 +5,7 @@
 </template>
 
 <script lang="ts" setup>
+
 interface Props {
   type?: string
   placeholder?: string
@@ -46,10 +47,8 @@ const model = defineModel<string, number>()
     }
   }
   &.large {
-    @apply text-base;
-
     > .input {
-      @apply py-3 text-base;
+      @apply py-3;
     }
   }
 

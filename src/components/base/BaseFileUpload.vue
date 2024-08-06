@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-4 border-2 border-dashed border-gray-300 rounded-md flex flex-col text-white items-center justify-center"
+    class="p-4 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center"
     @dragover.prevent="onDragOver"
     @drop.prevent="onDrop"
     @paste.prevent="onPaste"
@@ -8,10 +8,8 @@
     <input ref="fileInput" type="file" class="hidden" :multiple="props.multiple" @change="onFileChange" />
     <BaseButton @click="onBrowseFiles">Выбрать файл</BaseButton>
     <p>Или перетащите файл сюда</p>
-    <p>Или вставьте файл из буфера обмена</p>
-    <ul class="mt-4">
-      <li v-for="file in files" :key="file.name" class="text-gray-700">{{ file.name }}</li>
-    </ul>
+    <p class="mb-2">Или вставьте файл из буфера обмена</p>
+    <p v-for="file in files" :key="file.name">{{ file.name }}</p>
   </div>
 </template>
 

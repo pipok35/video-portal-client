@@ -5,7 +5,7 @@ import { createPinia } from 'pinia'
 import './assets/tailwind.css'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { IoExitOutline, IoCloseOutline, FaUserCircle } from 'oh-vue-icons/icons'
+import { IoExitOutline, FaUserCircle, RiCloseFill, MdOndemandvideo, HiUsers, MdCreate, HiSolidPlus } from 'oh-vue-icons/icons'
 
 import AppLayout from '@/views/layouts/AppLayout.vue'
 import SimpleLayout from '@/views/layouts/SimpleLayout.vue'
@@ -17,7 +17,7 @@ import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseTextarea from '@/components/base/BaseTextarea.vue'
 
-addIcons(IoExitOutline, IoCloseOutline, FaUserCircle)
+addIcons(IoExitOutline, FaUserCircle, RiCloseFill, MdOndemandvideo, HiUsers, MdCreate, HiSolidPlus)
 
 const app = createApp(App)
 app.use(createPinia())

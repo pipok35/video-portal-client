@@ -4,7 +4,7 @@
       <div class="flex justify-between">
         <div class="text-xl font-bold p-4">{{ props.title }}</div>
         <div class="controls p-4">
-          <v-icon class="cursor-pointer text-white" @click="emit('close')"><v-icon name="io-close-outline" /></v-icon>
+          <v-icon class="cursor-pointer" name="ri-close-fill" scale="1.5" fill="white" inverse @click="emit('close')" />
         </div>
       </div>
       <div class="p-4">
@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 
 interface Props {
-  width: number
+  width: string
   title: string
 }
 

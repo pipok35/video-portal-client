@@ -58,7 +58,6 @@ const emit = defineEmits(['click'])
 .button {
   @apply
     inline-flex justify-center items-center
-    rounded
     outline-none
     font-medium leading-none
     cursor-pointer
@@ -66,7 +65,7 @@ const emit = defineEmits(['click'])
     transition duration-100;
 
   &.small {
-    @apply px-2 py-1 text-xs;
+    @apply px-4 py-2 text-xs;
 
     &.left-icon {
       @apply pl-3;
@@ -76,7 +75,7 @@ const emit = defineEmits(['click'])
     }
   }
   &.medium {
-    @apply px-4 ~"py-2.5" text-sm;
+    @apply px-6 ~"py-2.5" text-sm;
 
     &.left-icon {
       @apply pl-5;
@@ -86,7 +85,7 @@ const emit = defineEmits(['click'])
     }
   }
   &.large {
-    @apply px-6 py-3 text-xl;
+    @apply px-8 py-3 text-xl;
 
     &.left-icon {
       @apply pl-6;
