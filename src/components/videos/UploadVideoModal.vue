@@ -5,7 +5,7 @@
         <span>Название</span>
         <BaseInput v-model="title" type="text" placeholder="Название" />
         <span>Описание</span>
-        <BaseInput v-model="description" type="text" placeholder="Описание" />
+        <BaseTextarea v-model="description" type="text" placeholder="Описание" />
         <BaseFileUpload multiple @files-added="handleSelect" />
         <BaseButton>Загрузить</BaseButton>
       </div>

@@ -2,10 +2,10 @@
   <BaseModal title="Создать канал" width="400px">
     <form @submit.prevent="createChannel">
       <div class="flex flex-col gap-2">
-        <span class="block text-gray-700">Название</span>
+        <span>Название</span>
         <BaseInput v-model="title" type="text" />
-        <label class="block text-gray-700">Описание</label>
-        <textarea v-model="description" class="border p-2 w-full"></textarea>
+        <span>Описание</span>
+        <baseTextarea v-model="description"></baseTextarea>
         <BaseButton>Создать</BaseButton>
       </div>
     </form>

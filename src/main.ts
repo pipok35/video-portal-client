@@ -15,6 +15,7 @@ import BaseModal from '@/components/base/BaseModal.vue'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
+import BaseTextarea from '@/components/base/BaseTextarea.vue'
 
 addIcons(IoExitOutline, IoCloseOutline, FaUserCircle)
 
@@ -32,5 +33,6 @@ app.component('BaseModal', BaseModal)
 app.component('BaseFileUpload', BaseFileUpload)
 app.component('BaseButton', BaseButton)
 app.component('BaseInput', BaseInput)
+app.component('BaseTextarea', BaseTextarea)
 
 app.mount('#app')
