@@ -8,8 +8,12 @@ export const useVideoStore = defineStore('video', {
     videos: [] as IVideo[]
   }),
   actions: {
-    async fetchVideos () {
-      const response = await axios.get('/videos')
+    async fetchVideos (conditions?: object) {
+      const response = await axios.get('/videos', {
+        params: {
+          ...conditions
+        }
+      })
       this.videos = response.data as IVideo[]
     },
     async fetchVideo (id: string): Promise<IVideo> {
