@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white shadow flex flex-col">
-    <div v-if="props.title" class="p-4 border-b font-bold text-xl">
+  <div class=" bg-background shadow rounded-2xl flex flex-col h-full">
+    <div v-if="props.title" class="p-4 font-bold text-xl">
       {{ props.title }}
     </div>
     <div class="grow p-4">

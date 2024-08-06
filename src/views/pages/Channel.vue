@@ -3,8 +3,8 @@
     <h1 class="text-2xl font-bold mb-4">{{ channel?.title }}</h1>
     <p>{{ channel?.description }}</p>
     <div class="flex gap-2">
-      <button class="bg-green-500 text-white px-4 py-2" @click="subscribe">Подписаться</button>
-      <button class="bg-red-500 text-white px-4 py-2" @click="unsubscribe">Отписаться</button>
+      <BaseButton @click="subscribe">Подписаться</BaseButton>
+      <BaseButton @click="unsubscribe">Отписаться</BaseButton>
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@
           <input v-model="email" type="text" placeholder="E-mail" class="border p-2 w-full" />
           <span>Пароль</span>
           <input v-model="password" type="password" placeholder="Пароль" class="border p-2 w-full" />
-          <button type="submit" class="bg-gray-800 text-white p-2 rounded">Зарегистрироваться</button>
+          <BaseButton @click="register">Зарегистрироваться</BaseButton>
         </form>
       </BaseCard>
     </div>

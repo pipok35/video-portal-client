@@ -4,9 +4,8 @@ import router from './router'
 import { createPinia } from 'pinia'
 import './assets/tailwind.css'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { OhVueIcon, addIcons } from 'oh-vue-icons'
+import { IoExitOutline, IoCloseOutline, FaUserCircle } from 'oh-vue-icons/icons'
 
 import AppLayout from '@/views/layouts/AppLayout.vue'
 import SimpleLayout from '@/views/layouts/SimpleLayout.vue'
@@ -14,14 +13,15 @@ import SimpleLayout from '@/views/layouts/SimpleLayout.vue'
 import BaseCard from '@/components/base/BaseCard.vue'
 import BaseModal from '@/components/base/BaseModal.vue'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 
-library.add(faTimes)
+addIcons(IoExitOutline, IoCloseOutline, FaUserCircle)
 
 const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-app.component('FontAwesomeIcon', FontAwesomeIcon)
+app.component('VIcon', OhVueIcon)
 
 app.component('AppLayout', AppLayout)
 app.component('SimpleLayout', SimpleLayout)
@@ -29,5 +29,6 @@ app.component('SimpleLayout', SimpleLayout)
 app.component('BaseCard', BaseCard)
 app.component('BaseModal', BaseModal)
 app.component('BaseFileUpload', BaseFileUpload)
+app.component('BaseButton', BaseButton)
 
 app.mount('#app')

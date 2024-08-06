@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-neutral-100">
+  <div class="bg-layout text-white font-sans">
     <component :is="$route.meta.layout"></component>
   </div>
 </template>

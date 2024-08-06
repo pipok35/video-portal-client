@@ -7,8 +7,8 @@
         <span>Описание</span>
         <input v-model="description" type="text" placeholder="Описание" class="border p-2 w-full" />
         <BaseFileUpload multiple @files-added="handleSelect" />
+        <BaseButton>Загрузить</BaseButton>
       </div>
-      <button type="submit" class="bg-gray-800 text-white p-2 rounded">Загрузить</button>
     </form>
   </BaseModal>
 </template>
