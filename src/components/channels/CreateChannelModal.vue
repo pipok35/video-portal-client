@@ -1,14 +1,11 @@
 <template>
   <BaseModal title="Создать канал" width="400px">
     <form @submit.prevent="createChannel">
-      <div class="mb-4">
-        <label class="block text-gray-700">Название</label>
-        <input v-model="title" type="text" class="border p-2 w-full" required />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700">Описание</label>
-        <textarea v-model="description" class="border p-2 w-full" required></textarea>
-      </div>
+      <div class="flex flex-col gap-2"></div>
+      <span class="block text-gray-700">Название</span>
+      <input v-model="title" type="text" class="border p-2 w-full" required />
+      <label class="block text-gray-700">Описание</label>
+      <textarea v-model="description" class="border p-2 w-full" required></textarea>
       <button type="submit" class="bg-gray-800 text-white px-4 py-2">Создать</button>
     </form>
   </BaseModal>

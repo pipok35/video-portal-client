@@ -1,6 +1,6 @@
 <template>
-  <UploadVideoModal v-if="isShowUploadVideoModal" width="400px" title="Загрузить видео" @close="isShowUploadVideoModal = false" />
-  <CreateChannelModal v-if="isShowCreateChannelModal" width="400px" title="Загрузить видео" @close="isShowCreateChannelModal = false" />
+  <UploadVideoModal v-if="isShowUploadVideoModal" width="400px" @close="isShowUploadVideoModal = false" />
+  <CreateChannelModal v-if="isShowCreateChannelModal" width="400px" @close="isShowCreateChannelModal = false" />
   <div class="grid grid-cols-12 gap-2 p-4">
     <div class="col-span-2">
       <BaseCard>

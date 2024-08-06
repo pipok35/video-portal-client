@@ -1,15 +1,15 @@
 <template>
   <BaseModal title="Загрузить видео" width="400px">
-    <div>
-      <form class="space-y-4" @submit.prevent="create">
-        <div class="flex flex-col gap-2">
-          <input v-model="title" type="text" placeholder="Название" class="border p-2 w-full" />
-          <input v-model="description" type="text" placeholder="Описание" class="border p-2 w-full" />
-          <BaseFileUpload multiple @files-added="handleSelect" />
-        </div>
-        <button type="submit" class="bg-gray-800 text-white p-2 rounded">Загрузить</button>
-      </form>
-    </div>
+    <form @submit.prevent="create">
+      <div class="flex flex-col gap-2">
+        <span>Название</span>
+        <input v-model="title" type="text" placeholder="Название" class="border p-2 w-full" />
+        <span>Описание</span>
+        <input v-model="description" type="text" placeholder="Описание" class="border p-2 w-full" />
+        <BaseFileUpload multiple @files-added="handleSelect" />
+      </div>
+      <button type="submit" class="bg-gray-800 text-white p-2 rounded">Загрузить</button>
+    </form>
   </BaseModal>
 </template>
 
