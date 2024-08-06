@@ -1,10 +1,10 @@
 <template>
-  <li class="border p-4 mb-2">
-    <router-link :to="{ name: 'channel', params: { id: props.channel._id }}">
-      <h2 class="text-xl font-semibold">{{ props.channel.title }}</h2>
+  <BaseCard>
+    <router-link class="flex flex-col gap-2" :to="{ name: 'channel', params: { id: props.channel._id }}">
+      <div class="text-xl font-semibold">{{ props.channel.title }}</div>
+      <div class="text-xl">{{ props.channel.description }}</div>
     </router-link>
-    <p>{{ props.channel.description }}</p>
-  </li>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">

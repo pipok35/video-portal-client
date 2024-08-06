@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <ul>
-      <ChannelListItem
-        v-for="channel in props.channels"
-        :key="channel._id"
-        :channel="channel"
-      />
-    </ul>
+  <div class="flex flex-col gap-2">
+    <ChannelListItem
+      v-for="channel in props.channels"
+      :key="channel._id"
+      :channel="channel"
+    />
   </div>
 </template>
 
