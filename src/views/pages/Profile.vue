@@ -1,8 +1,8 @@
 <template>
   <UploadVideoModal v-if="isShowUploadVideoModal" width="400px" @close="isShowUploadVideoModal = false" />
   <CreateChannelModal v-if="isShowCreateChannelModal" width="400px" @close="isShowCreateChannelModal = false" />
-  <div class="grid grid-cols-12 grid-rows-2 h-full gap-2 p-4">
-    <div class="col-span-3 row-span-2">
+  <div class="grid grid-cols-12 h-full gap-2 p-4">
+    <div class="col-span-3">
       <BaseCard>
         <div class="flex flex-col gap-4 items-center mb-4">
           <div class="bg-base rounded-full w-40 h-40"></div>
