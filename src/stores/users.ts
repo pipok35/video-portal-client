@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
 import { axios } from '@/axiosConfig'
-import { User } from '@/interfaces/user'
+import { IUser } from '@/interfaces/user'
+import { UpdateUserDto } from '@/dto/update-user.dto'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null as User | null,
+    user: null as IUser | null,
     token: localStorage.getItem('token') || '' as string
   }),
   actions: {
@@ -22,11 +23,11 @@ export const useUserStore = defineStore('user', {
       if (this.token) {
         const response = await axios.get('/auth/me')
 
-        this.user = response.data as User
+        this.user = response.data as IUser
       }
     },
-    async update (id: string, data: { username: string, email: string }) {
-      await axios.patch(`/users/${id}`, { ...data })
+    async update (id: string, updateUserDto: UpdateUserDto) {
+      await axios.post(`/users/${id}`, { ...updateUserDto })
     },
     logout () {
       this.token = ''

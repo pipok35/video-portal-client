@@ -1,4 +1,6 @@
 <template>
+  <UploadModal v-if="showUploadVideoFileModal" type="videos" width="400px" @upload="(file: IFile) => videoFile = file" @close="showUploadVideoFileModal = false" />
+  <UploadModal v-if="showUploadPreviewModal" type="previews" width="400px" @upload="(file: IFile) => previewFile = file" @close="showUploadPreviewModal = false" />
   <BaseModal title="Загрузить видео" width="400px" @close="emit('close')">
     <form @submit.prevent="create">
       <div class="flex flex-col gap-2">
@@ -7,10 +9,12 @@
         <span>Описание</span>
         <BaseTextarea v-model="description" placeholder="Описание" />
         <span>Файл видео</span>
-        <BaseFileUpload multiple @files-added="handleSelectVideo" />
+        <div v-if="videoFile">{{ videoFile.name }}</div>
+        <BaseButton @click="showUploadVideoFileModal = true">Выбрать</BaseButton>
         <span>Файл превью</span>
-        <BaseFileUpload multiple @files-added="handleSelectPreview" />
-        <BaseButton @click="create">Загрузить</BaseButton>
+        <div v-if="previewFile">{{ previewFile.name }}</div>
+        <BaseButton @click="showUploadPreviewModal = true">Выбрать</BaseButton>
+        <div class="ml-auto"><BaseButton @click="create">Загрузить</BaseButton></div>
       </div>
     </form>
   </BaseModal>
@@ -19,41 +23,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useVideoStore } from '@/stores/videos'
-import { useFilesStore } from '@/stores/files'
 import { IFile } from '@/interfaces/file'
 
 const videoFile = ref<IFile>()
 const previewFile = ref<IFile>()
 const title = ref('')
 const description = ref('')
+const showUploadPreviewModal = ref<boolean>(false)
+const showUploadVideoFileModal = ref<boolean>(false)
 const videoStore = useVideoStore()
-const filesStore = useFilesStore()
 const emit = defineEmits(['close'])
-
-const uploadFile = async (file: File, type: 'videos' | 'previews') => {
-  if (file) {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    try {
-      return await filesStore.upload(formData, type)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
-
-const handleSelectPreview = async (files: File[]) => {
-  for (const file of files) {
-    previewFile.value = await uploadFile(file, 'previews')
-  }
-}
-
-const handleSelectVideo = async (files: File[]) => {
-  for (const file of files) {
-    videoFile.value = await uploadFile(file, 'videos')
-  }
-}
 
 const create = async () => {
   try {

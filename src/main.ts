@@ -16,6 +16,7 @@ import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseTextarea from '@/components/base/BaseTextarea.vue'
+import UploadModal from '@/components/UploadModal.vue'
 
 addIcons(IoExitOutline, FaUserCircle, RiCloseFill, MdOndemandvideo, HiUsers, MdCreate, HiSolidPlus)
 
@@ -28,6 +29,7 @@ app.component('VIcon', OhVueIcon)
 app.component('AppLayout', AppLayout)
 app.component('SimpleLayout', SimpleLayout)
 
+app.component('UploadModal', UploadModal)
 app.component('BaseCard', BaseCard)
 app.component('BaseModal', BaseModal)
 app.component('BaseFileUpload', BaseFileUpload)

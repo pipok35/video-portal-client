@@ -1,12 +1,13 @@
 <template>
-  <UploadVideoModal v-if="isShowUploadVideoModal" width="400px" @close="isShowUploadVideoModal = false" />
-  <CreateChannelModal v-if="isShowCreateChannelModal" width="400px" @close="isShowCreateChannelModal = false" />
+  <UploadVideoModal v-if="showUploadVideoModal" width="400px" @close="showUploadVideoModal = false" />
+  <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
+  <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex gap-2 p-4">
-    <div class="min-w-80">
+    <div class="w-1/3">
       <BaseCard class="h-full">
         <div class="flex flex-col gap-4 items-center mb-4">
-          <div class="bg-base rounded-full w-40 h-40"></div>
-          <div><BaseButton>Загрузить аватарку</BaseButton></div>
+          <img :src="avatarUrl" class="rounded-full w-40 h-40">
+          <div><BaseButton @click="showUploadAvatarModal = true">Загрузить аватарку</BaseButton></div>
         </div>
         <div class="menu-item">
           <router-link class="w-full" :to="{ name: 'videos' }">
@@ -20,11 +21,11 @@
             Мои каналы
           </router-link>
         </div>
-        <div class="menu-item" @click="isShowUploadVideoModal = true">
+        <div class="menu-item" @click="showUploadVideoModal = true">
           <v-icon name="hi-solid-plus" scale="1.5" fill="#9c1314" />
           Загрузить видео
         </div>
-        <div class="menu-item" @click="isShowCreateChannelModal = true">
+        <div class="menu-item" @click="showCreateChannelModal = true">
           <v-icon name="md-create" scale="1.5" fill="#9c1314" />
           Создать канал
         </div>
@@ -48,7 +49,7 @@
       </div>
       <div>
         <div class="font-bold text-2xl p-4">История просмотра</div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
           <VideoListItem
             v-for="video in videoHistory"
             :key="video._id"
@@ -61,19 +62,23 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/users'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
 import { IUser } from '@/interfaces/user'
 import VideoListItem from '@/components/videos/VideoListItem.vue'
 import { IVideo } from '@/interfaces/video'
+import { IFile } from '@/interfaces/file'
+import { useApiUrl } from '@/useApiUrl'
 
 const userStore = useUserStore()
-const isShowUploadVideoModal = ref<boolean>(false)
-const isShowCreateChannelModal = ref<boolean>(false)
+const showUploadVideoModal = ref<boolean>(false)
+const showCreateChannelModal = ref<boolean>(false)
+const showUploadAvatarModal = ref<boolean>(false)
 const user = ref<IUser>()
 const videoHistory = ref<IVideo[]>([])
+const apiUrl = useApiUrl()
 
 onMounted(async () => {
   await userStore.fetchUser()
@@ -83,9 +88,23 @@ onMounted(async () => {
   }
 })
 
+const avatarUrl = computed(() => {
+  return user.value?.avatarId ? `${apiUrl}/files/${user.value.avatarId}/download` : ''
+})
+
+const handleUploadAvatar = async (file: IFile) => {
+  if (user.value) {
+    await userStore.update(user.value._id, { ...user.value, avatarId: file._id })
+  }
+  await userStore.fetchUser()
+  if (userStore.user) {
+    user.value = userStore.user
+  }
+}
+
 const updateProfile = async () => {
   if (user.value) {
-    await userStore.update(user.value._id, { username: user.value?.username, email: user.value?.email })
+    await userStore.update(user.value._id, { ...user.value })
   }
 }
 </script>

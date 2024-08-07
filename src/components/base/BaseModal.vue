@@ -1,17 +1,19 @@
 <template>
-  <div class="base-modal-wrapper">
-    <div class="base-modal" :style="{ 'max-width': props.width }">
-      <div class="flex justify-between">
-        <div class="text-xl font-bold p-4">{{ props.title }}</div>
-        <div class="controls p-4">
-          <v-icon class="cursor-pointer" name="ri-close-fill" scale="1.5" fill="white" inverse @click="emit('close')" />
+  <teleport to="body">
+    <div class="base-modal-wrapper text-white">
+      <div class="base-modal" :style="{ 'max-width': props.width }">
+        <div class="flex justify-between">
+          <div class="text-xl font-bold p-4">{{ props.title }}</div>
+          <div class="controls p-4">
+            <v-icon class="cursor-pointer" name="ri-close-fill" scale="1.5" fill="white" inverse @click="emit('close')" />
+          </div>
+        </div>
+        <div class="p-4">
+          <slot></slot>
         </div>
       </div>
-      <div class="p-4">
-        <slot></slot>
-      </div>
     </div>
-  </div>
+  </teleport>
 </template>
 
 <script lang="ts" setup>

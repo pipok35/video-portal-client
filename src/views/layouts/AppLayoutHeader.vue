@@ -25,7 +25,7 @@
           Зарегистрироваться
         </BaseButton>
         <div v-if="route.meta.layout === 'AppLayout'" class="flex gap-2 items-center">
-          <router-link :to="{ name: 'profile' }"><v-icon name="fa-user-circle" scale="2.5"></v-icon></router-link>
+          <router-link :to="{ name: 'profile' }" class="min-w-10 min-h-10"><img :src="avatarUrl" class="block rounded-full max-w-12 min-h-12" /></router-link>
           <BaseButton color="red" size="large" right-icon="io-exit-outline" @click="logout">Выйти</BaseButton>
         </div>
       </nav>
@@ -36,10 +36,17 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/users'
 import { useRouter, useRoute } from 'vue-router'
+import { useApiUrl } from '@/useApiUrl'
+import { computed } from 'vue'
 
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
+const apiUrl = useApiUrl()
+
+const avatarUrl = computed(() => {
+  return userStore.user?.avatarId ? `${apiUrl}/files/${userStore.user?.avatarId}/download` : ''
+})
 
 const logout = () => {
   userStore.logout()
