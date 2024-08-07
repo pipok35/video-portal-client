@@ -1,7 +1,7 @@
 <template>
   <BaseCard>
-    <router-link :to="{ name: 'video', params: { id: props.video._id }}" class="flex flex-col w-full h-full gap-2">
-      <img :src="previewUrl" class="grow rounded object-cover" />
+    <router-link :to="{ name: 'video', params: { id: props.video._id }}" class="flex flex-col gap-2 min-h-80">
+      <img :src="previewUrl" class="rounded grow object-cover" />
       <div class="text-xl font-bold">{{ props.video.title }}</div>
       <BaseButton>Смотреть</BaseButton>
     </router-link>

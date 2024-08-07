@@ -1,9 +1,9 @@
 <template>
   <UploadVideoModal v-if="isShowUploadVideoModal" width="400px" @close="isShowUploadVideoModal = false" />
   <CreateChannelModal v-if="isShowCreateChannelModal" width="400px" @close="isShowCreateChannelModal = false" />
-  <div class="grid grid-cols-12 h-full gap-2 p-4">
-    <div class="col-span-3">
-      <BaseCard>
+  <div class="flex gap-2 p-4">
+    <div class="min-w-80">
+      <BaseCard class="h-full">
         <div class="flex flex-col gap-4 items-center mb-4">
           <div class="bg-base rounded-full w-40 h-40"></div>
           <div><BaseButton>Загрузить аватарку</BaseButton></div>
@@ -30,23 +30,25 @@
         </div>
       </BaseCard>
     </div>
-    <div class="grid gap-2 col-span-9">
-      <BaseCard title="Профиль">
-        <div class="grid grid-cols-3 gap-4">
-          <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
-            <span>E-mail</span>
-            <BaseInput v-model="user.email" placeholder="E-mail" />
-            <span>Имя пользователя</span>
-            <BaseInput v-model="user.username" placeholder="Имя пользователя" />
-            <div><BaseButton type="submit">Изменить</BaseButton></div>
-          </form>
-          <div>
+    <div class="grow">
+      <div>
+        <BaseCard title="Профиль">
+          <div class="grid grid-cols-3 gap-4">
+            <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
+              <span>E-mail</span>
+              <BaseInput v-model="user.email" placeholder="E-mail" />
+              <span>Имя пользователя</span>
+              <BaseInput v-model="user.username" placeholder="Имя пользователя" />
+              <div><BaseButton type="submit">Изменить</BaseButton></div>
+            </form>
+            <div>
+            </div>
           </div>
-        </div>
-      </BaseCard>
+        </BaseCard>
+      </div>
       <div>
         <div class="font-bold text-2xl p-4">История просмотра</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-2">
           <VideoListItem
             v-for="video in videoHistory"
             :key="video._id"
