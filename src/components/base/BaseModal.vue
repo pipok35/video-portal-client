@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed w-full h-full bg-neutral-900 bg-opacity-30 z-10 flex flex-col justify-center items-center">
-    <div class="relative shadow bg-background rounded-2xl" :style="{ 'min-width': props.width }">
+  <div class="base-modal-wrapper">
+    <div class="base-modal" :style="{ 'max-width': props.width }">
       <div class="flex justify-between">
         <div class="text-xl font-bold p-4">{{ props.title }}</div>
         <div class="controls p-4">
@@ -25,3 +25,28 @@ const props = defineProps<Props>()
 const emit = defineEmits(['close'])
 
 </script>
+
+<style lang="less">
+.base-modal-wrapper {
+  @apply
+    fixed
+    top-0 left-0
+    w-full h-full
+    bg-neutral-900/50
+    z-40
+    overflow-x-hidden
+    overflow-y-auto;
+}
+
+.base-modal {
+  @apply
+    relative
+    flex flex-col
+    min-w-full md:min-w-min
+    min-h-full md:min-h-min
+    md:my-16 md:mx-auto
+    md:rounded
+    bg-background
+    md:shadow-lg;
+}
+</style>
