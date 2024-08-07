@@ -4,14 +4,18 @@
   <div class="grid grid-cols-12 grid-rows-2 h-full gap-2 p-4">
     <div class="col-span-3 row-span-2">
       <BaseCard>
+        <div class="flex flex-col gap-4 items-center mb-4">
+          <div class="bg-base rounded-full w-40 h-40"></div>
+          <div><BaseButton>Загрузить аватарку</BaseButton></div>
+        </div>
         <div class="menu-item">
-          <router-link :to="{ name: 'videos' }">
+          <router-link class="w-full" :to="{ name: 'videos' }">
             <v-icon name="md-ondemandvideo" scale="1.5" fill="#9c1314" />
             Мои видео
           </router-link>
         </div>
         <div class="menu-item">
-          <router-link :to="{ name: 'channels' }">
+          <router-link class="w-full" :to="{ name: 'channels' }">
             <v-icon name="hi-users" scale="1.5" fill="#9c1314" />
             Мои каналы
           </router-link>
@@ -28,22 +32,22 @@
     </div>
     <div class="grid gap-2 col-span-9">
       <BaseCard title="Профиль">
-        <div class="grid grid-cols-2">
-          <div>
-            аватарка
-          </div>
+        <div class="grid grid-cols-3 gap-4">
           <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
             <span>E-mail</span>
             <BaseInput v-model="user.email" placeholder="E-mail" />
             <span>Имя пользователя</span>
             <BaseInput v-model="user.username" placeholder="Имя пользователя" />
-            <div class="ml-auto"><BaseButton type="submit">Изменить</BaseButton></div>
+            <div><BaseButton type="submit">Изменить</BaseButton></div>
           </form>
+          <div>
+          </div>
         </div>
       </BaseCard>
-      <BaseCard title="История просмотра">
-        История просмотра
-      </BaseCard>
+      <div>
+        <div class="font-bold text-2xl p-4">История просмотра</div>
+        <VideosList v-if="videoHistory" :videos="videoHistory" />
+      </div>
     </div>
   </div>
 </template>
@@ -53,17 +57,21 @@ import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/users'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
-import { User } from '@/interfaces/user'
+import { IUser } from '@/interfaces/user'
+import VideosList from '@/components/videos/VideosList.vue'
+import { IVideo } from '@/interfaces/video'
 
 const userStore = useUserStore()
-const isShowUploadVideoModal = ref(false)
-const isShowCreateChannelModal = ref(false)
-const user = ref<User>()
+const isShowUploadVideoModal = ref<boolean>(false)
+const isShowCreateChannelModal = ref<boolean>(false)
+const user = ref<IUser>()
+const videoHistory = ref<IVideo[]>([])
 
 onMounted(async () => {
   await userStore.fetchUser()
   if (userStore.user) {
     user.value = userStore.user
+    videoHistory.value = userStore.user.videoHistory
   }
 })
 
@@ -83,7 +91,7 @@ const updateProfile = async () => {
     rounded-xl
     pl-2
     py-3
-    text-2xl;
+    text-xl;
 
   &:hover {
     @apply bg-base-hover;

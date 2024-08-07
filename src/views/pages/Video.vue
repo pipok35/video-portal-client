@@ -24,6 +24,11 @@ const videoUrl = computed(() => {
 
 onMounted(async () => {
   video.value = await videoStore.fetchVideo(route.params.id as string)
+  addToHistory(video.value._id)
 })
+
+const addToHistory = async (videoId: string) => {
+  await videoStore.addToHistory(videoId)
+}
 
 </script>

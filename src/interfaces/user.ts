@@ -1,5 +1,6 @@
-export interface User {
-    _id: string,
-    email: string,
+export interface IUser {
+    _id: string
+    email: string
     username: string
+    videosHistory: []
 }

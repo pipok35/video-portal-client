@@ -25,6 +25,9 @@ export const useVideoStore = defineStore('video', {
       await this.fetchVideos()
 
       return response.data
+    },
+    async addToHistory (videoId: string) {
+      await axios.patch(`/videos/${videoId}/addToHistory`)
     }
   }
 })
