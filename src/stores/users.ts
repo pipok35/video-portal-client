@@ -25,6 +25,9 @@ export const useUserStore = defineStore('user', {
         this.user = response.data as User
       }
     },
+    async update (id: string, data: { username: string, email: string }) {
+      await axios.patch(`/users/${id}`, { ...data })
+    },
     logout () {
       this.token = ''
       this.user = null

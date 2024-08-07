@@ -27,28 +27,51 @@
       </BaseCard>
     </div>
     <div class="grid gap-2 col-span-9">
-      <div>
-        <BaseCard title="Профиль">
-          Профиль
-        </BaseCard>
-      </div>
-      <div>
-        <BaseCard title="История просмотра">
-          История просмотра
-        </BaseCard>
-      </div>
+      <BaseCard title="Профиль">
+        <div class="grid grid-cols-2">
+          <div>
+            аватарка
+          </div>
+          <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
+            <span>E-mail</span>
+            <BaseInput v-model="user.email" placeholder="E-mail" />
+            <span>Имя пользователя</span>
+            <BaseInput v-model="user.username" placeholder="Имя пользователя" />
+            <div class="ml-auto"><BaseButton type="submit">Изменить</BaseButton></div>
+          </form>
+        </div>
+      </BaseCard>
+      <BaseCard title="История просмотра">
+        История просмотра
+      </BaseCard>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useUserStore } from '@/stores/users'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
+import { User } from '@/interfaces/user'
 
+const userStore = useUserStore()
 const isShowUploadVideoModal = ref(false)
 const isShowCreateChannelModal = ref(false)
+const user = ref<User>()
 
+onMounted(async () => {
+  await userStore.fetchUser()
+  if (userStore.user) {
+    user.value = userStore.user
+  }
+})
+
+const updateProfile = async () => {
+  if (user.value) {
+    await userStore.update(user.value._id, { username: user.value?.username, email: user.value?.email })
+  }
+}
 </script>
 
 <style lang="less">
