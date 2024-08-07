@@ -7,8 +7,10 @@
   >
     <input ref="fileInput" type="file" class="hidden" :multiple="props.multiple" @change="onFileChange" />
     <BaseButton @click="onBrowseFiles">Выбрать файл</BaseButton>
-    <p>Или перетащите файл сюда</p>
-    <p class="mb-2">Или вставьте файл из буфера обмена</p>
+    <div v-if="props.showText">
+      <p>Или перетащите файл сюда</p>
+      <p class="mb-2">Или вставьте файл из буфера обмена</p>
+    </div>
     <p v-for="file in files" :key="file.name">{{ file.name }}</p>
   </div>
 </template>
@@ -17,7 +19,8 @@
 import { ref, watch } from 'vue'
 
 interface Props {
-  multiple?: boolean;
+  multiple?: boolean
+  showText?: boolean
 }
 
 const props = defineProps<Props>()

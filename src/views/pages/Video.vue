@@ -19,7 +19,7 @@ const videoStore = useVideoStore()
 const video = ref<IVideo | null>(null)
 
 const videoUrl = computed(() => {
-  return video.value ? `${apiUrl}/files/${video.value.file}/download` : ''
+  return video.value ? `${apiUrl}/files/${video.value.videoFile}/download` : ''
 })
 
 onMounted(async () => {

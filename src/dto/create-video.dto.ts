@@ -1,5 +1,6 @@
 export interface CreateVideDto {
     title: string,
     description: string,
-    file: string,
+    videoFile: string,
+    previewFile: string
 }

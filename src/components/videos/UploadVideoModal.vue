@@ -6,7 +6,10 @@
         <BaseInput v-model="title" placeholder="Название" />
         <span>Описание</span>
         <BaseTextarea v-model="description" placeholder="Описание" />
-        <BaseFileUpload multiple @files-added="handleSelect" />
+        <span>Файл видео</span>
+        <BaseFileUpload multiple @files-added="handleSelectVideo" />
+        <span>Файл превью</span>
+        <BaseFileUpload multiple @files-added="handleSelectPreview" />
         <BaseButton @click="create">Загрузить</BaseButton>
       </div>
     </form>
@@ -21,28 +24,48 @@ import { useRouter } from 'vue-router'
 import { IFile } from '@/interfaces/file'
 
 const router = useRouter()
-let videoFile: IFile
+const videoFile = ref<IFile>()
+const previewFile = ref<IFile>()
 const title = ref('')
 const description = ref('')
 const videoStore = useVideoStore()
 const filesStore = useFilesStore()
 
-const uploadFile = async (file: File) => {
+const uploadFile = async (file: File, type: 'videos' | 'previews') => {
   if (file) {
     const formData = new FormData()
     formData.append('file', file)
 
     try {
-      videoFile = await filesStore.upload(formData, 'videos')
+      return await filesStore.upload(formData, type)
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-const handleSelect = (files: File[]) => {
+// const uploadPreviewFile = async (file: File) => {
+//   if (file) {
+//     const formData = new FormData()
+//     formData.append('file', file)
+
+//     try {
+//       previewFile.value = await filesStore.upload(formData, 'previews')
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+// }
+
+const handleSelectPreview = async (files: File[]) => {
   for (const file of files) {
-    uploadFile(file)
+    previewFile.value = await uploadFile(file, 'previews')
+  }
+}
+
+const handleSelectVideo = async (files: File[]) => {
+  for (const file of files) {
+    videoFile.value = await uploadFile(file, 'videos')
   }
 }
 
@@ -51,7 +74,8 @@ const create = async () => {
     const id = await videoStore.create({
       title: title.value,
       description: description.value,
-      file: videoFile._id
+      videoFile: videoFile.value ? videoFile.value._id : '',
+      previewFile: previewFile.value ? previewFile.value._id : ''
     })
 
     router.push({ name: 'video', params: { id } })
