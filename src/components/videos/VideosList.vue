@@ -1,12 +1,11 @@
 <template>
   <div class="flex flex-wrap gap-2">
-    <div
+    <VideoListItem
       v-for="video in props.videos"
       :key="video._id"
       class="max-w-60"
-    >
-      <VideoListItem :video="video" />
-    </div>
+      :video="video"
+    />
   </div>
 </template>
 

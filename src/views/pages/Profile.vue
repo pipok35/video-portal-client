@@ -46,7 +46,13 @@
       </BaseCard>
       <div>
         <div class="font-bold text-2xl p-4">История просмотра</div>
-        <VideosList v-if="videoHistory" :videos="videoHistory" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+          <VideoListItem
+            v-for="video in videoHistory"
+            :key="video._id"
+            :video="video"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -58,7 +64,7 @@ import { useUserStore } from '@/stores/users'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
 import { IUser } from '@/interfaces/user'
-import VideosList from '@/components/videos/VideosList.vue'
+import VideoListItem from '@/components/videos/VideoListItem.vue'
 import { IVideo } from '@/interfaces/video'
 
 const userStore = useUserStore()

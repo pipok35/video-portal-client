@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-background shadow rounded-2xl flex flex-col h-full gap-4 p-4">
+  <div class=" bg-background shadow rounded-2xl flex flex-col w-full gap-4 p-4">
     <div v-if="props.title" class="font-bold text-2xl">
       {{ props.title }}
     </div>
