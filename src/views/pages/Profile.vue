@@ -3,7 +3,7 @@
   <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex gap-2 p-4">
-    <div class="w-1/3">
+    <div class="w-96">
       <BaseCard class="h-full">
         <div class="flex flex-col gap-4 items-center mb-4">
           <img :src="avatarUrl" class="rounded-full w-40 h-40">
