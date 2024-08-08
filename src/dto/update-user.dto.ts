@@ -1,5 +1,4 @@
 export interface UpdateUserDto {
     username: string
     email: string
-    avatarId: string
 }

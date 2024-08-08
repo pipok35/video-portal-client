@@ -31,7 +31,7 @@
         </div>
       </BaseCard>
     </div>
-    <div class="grow">
+    <div class="grow flex flex-col gap-2">
       <div>
         <BaseCard title="Профиль">
           <div class="grid grid-cols-3 gap-4">
@@ -47,8 +47,11 @@
           </div>
         </BaseCard>
       </div>
+      <div class="flex justify-between">
+        <div class="font-bold text-2xl p-2">История просмотра</div>
+        <BaseButton color="red" @click="cleanHistory">Очистить историю</BaseButton>
+      </div>
       <div>
-        <div class="font-bold text-2xl p-4">История просмотра</div>
         <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
           <VideoListItem
             v-for="video in videoHistory"
@@ -71,20 +74,21 @@ import VideoListItem from '@/components/videos/VideoListItem.vue'
 import { IVideo } from '@/interfaces/video'
 import { IFile } from '@/interfaces/file'
 import { useApiUrl } from '@/useApiUrl'
+import BaseButton from '@/components/base/BaseButton.vue'
 
 const userStore = useUserStore()
 const showUploadVideoModal = ref<boolean>(false)
 const showCreateChannelModal = ref<boolean>(false)
 const showUploadAvatarModal = ref<boolean>(false)
-const user = ref<IUser>()
-const videoHistory = ref<IVideo[]>([])
+const user = ref<IUser | null>(null)
+const videoHistory = ref<IVideo[] | string[]>([])
 const apiUrl = useApiUrl()
 
 onMounted(async () => {
   await userStore.fetchUser()
   if (userStore.user) {
     user.value = userStore.user
-    videoHistory.value = userStore.user.videoHistory
+    videoHistory.value = userStore.user.videoHistory || []
   }
 })
 
@@ -94,10 +98,7 @@ const avatarUrl = computed(() => {
 
 const handleUploadAvatar = async (file: IFile) => {
   if (user.value) {
-    await userStore.update(user.value._id, { ...user.value, avatarId: file._id })
-  }
-  await userStore.fetchUser()
-  if (userStore.user) {
+    await userStore.updateAvatar(user.value._id, file._id)
     user.value = userStore.user
   }
 }
@@ -105,6 +106,21 @@ const handleUploadAvatar = async (file: IFile) => {
 const updateProfile = async () => {
   if (user.value) {
     await userStore.update(user.value._id, { ...user.value })
+    user.value = userStore.user
+  }
+}
+
+const cleanHistory = async () => {
+  if (!confirm('Вы действительно хотите очистить историю просмотра?')) {
+    return
+  }
+  if (user.value) {
+    try {
+      await userStore.cleanHistory(user.value._id)
+      videoHistory.value = userStore.user?.videoHistory || []
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 </script>

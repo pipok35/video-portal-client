@@ -28,6 +28,15 @@ export const useUserStore = defineStore('user', {
     },
     async update (id: string, updateUserDto: UpdateUserDto) {
       await axios.post(`/users/${id}`, { ...updateUserDto })
+      await this.fetchUser()
+    },
+    async updateAvatar (id: string, avatarId: string) {
+      await axios.patch(`/users/${id}/avatar`, { avatarId })
+      await this.fetchUser()
+    },
+    async cleanHistory (id: string) {
+      await axios.patch(`/users/${id}/cleanHistory`)
+      await this.fetchUser()
     },
     logout () {
       this.token = ''
