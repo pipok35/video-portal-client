@@ -1,10 +1,12 @@
 <template>
   <div class="bg-layout text-white font-sans">
+    <Notification />
     <component :is="$route.meta.layout"></component>
   </div>
 </template>
 
 <script setup lang="ts">
+import Notification from '@/components/Notification.vue'
 import { axios } from './axiosConfig'
 import { useUserStore } from '@/stores/users'
 import { useRouter } from 'vue-router'
