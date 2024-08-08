@@ -16,14 +16,23 @@
 import { ref } from 'vue'
 import { useChannelStore } from '@/stores/channels'
 import { useRouter } from 'vue-router'
+import { handleError } from '@/utils/errorHandler'
+import { useNotificationStore } from '@/stores/notification'
 
 const title = ref('')
 const description = ref('')
 const channelStore = useChannelStore()
 const router = useRouter()
+const notificationStore = useNotificationStore()
 
 const createChannel = async () => {
-  await channelStore.createChannel(title.value, description.value)
-  router.push({ name: 'channels' })
+  try {
+    const response = await channelStore.createChannel(title.value, description.value)
+    notificationStore.addNotification({ type: response.data.status, message: response.data.message })
+
+    router.push({ name: 'channels' })
+  } catch (error) {
+    handleError(error)
+  }
 }
 </script>

@@ -20,11 +20,8 @@ export const useVideoStore = defineStore('video', {
       const response = await axios.get(`/videos/${id}`)
       return response.data
     },
-    async create (data: CreateVideDto): Promise<string> {
-      const response = await axios.post('/videos/create', data)
-      await this.fetchVideos()
-
-      return response.data
+    async create (data: CreateVideDto) {
+      return await axios.post('/videos/create', data)
     },
     async addToHistory (videoId: string) {
       await axios.patch(`/videos/${videoId}/addToHistory`)

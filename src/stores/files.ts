@@ -7,14 +7,12 @@ export const useFilesStore = defineStore('files', {
     files: [] as IFile[]
   }),
   actions: {
-    async upload (formData: FormData, type: string): Promise<IFile> {
-      const response = await axios.post('/files/upload', formData, {
+    async upload (formData: FormData, type: string) {
+      return await axios.post('/files/upload', formData, {
         params: {
           type
         }
       })
-
-      return response.data
     },
     async download (fileId: string) {
       const response = await axios.get(`/files/${fileId}/download`)

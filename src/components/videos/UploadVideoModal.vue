@@ -24,6 +24,8 @@
 import { ref } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { IFile } from '@/interfaces/file'
+import { useNotificationStore } from '@/stores/notification'
+import { handleError } from '@/utils/errorHandler'
 
 const videoFile = ref<IFile>()
 const previewFile = ref<IFile>()
@@ -32,20 +34,22 @@ const description = ref('')
 const showUploadPreviewModal = ref<boolean>(false)
 const showUploadVideoFileModal = ref<boolean>(false)
 const videoStore = useVideoStore()
+const notificationStore = useNotificationStore()
 const emit = defineEmits(['close'])
 
 const create = async () => {
   try {
-    await videoStore.create({
+    const response = await videoStore.create({
       title: title.value,
       description: description.value,
       videoFile: videoFile.value ? videoFile.value._id : '',
       previewFile: previewFile.value ? previewFile.value._id : ''
     })
 
+    notificationStore.addNotification({ type: response.data.status, message: response.data.message })
     emit('close')
   } catch (error) {
-    console.error(error)
+    handleError(error)
   }
 }
 </script>

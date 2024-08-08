@@ -16,8 +16,7 @@ export const useChannelStore = defineStore('channel', {
       return response.data
     },
     async createChannel (title: string, description: string) {
-      await axios.post('/channels', { title, description })
-      await this.fetchChannels()
+      return await axios.post('/channels', { title, description })
     },
     async subscribeToChannel (channelId: string) {
       await axios.post(`/channels/${channelId}/subscribe`, {})
