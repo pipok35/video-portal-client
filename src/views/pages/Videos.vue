@@ -21,7 +21,6 @@ import { useVideoStore } from '@/stores/videos'
 import { useUserStore } from '@/stores/users'
 import { IVideo } from '@/interfaces/video'
 import VideoListItem from '@/components/videos/VideoListItem.vue'
-import { AxiosError } from 'axios'
 
 const isLoading = ref(false)
 const videos = ref<IVideo[]>([])
@@ -31,14 +30,8 @@ const userStore = useUserStore()
 onMounted(async () => {
   isLoading.value = true
 
-  try {
-    await videoStore.fetchVideos({ conditions: { 'created.by': userStore.user?._id } })
-    videos.value = videoStore.videos
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error(error.response?.data.message)
-    }
-  }
+  await videoStore.fetchVideos({ conditions: { 'created.by': userStore.user?._id } })
+  videos.value = videoStore.videos
 
   isLoading.value = false
 })

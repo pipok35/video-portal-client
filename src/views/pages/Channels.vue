@@ -12,7 +12,6 @@ import { onMounted, ref } from 'vue'
 import { useChannelStore } from '@/stores/channels'
 import ChannelList from '@/components/channels/ChannelsList.vue'
 import { IChannel } from '@/interfaces/channel'
-import { AxiosError } from 'axios'
 
 const channelStore = useChannelStore()
 const channels = ref<IChannel[]>([])
@@ -21,14 +20,8 @@ const isLoading = ref(false)
 onMounted(async () => {
   isLoading.value = true
 
-  try {
-    await channelStore.fetchChannels()
-    channels.value = channelStore.channels
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error(error.response?.data.message)
-    }
-  }
+  await channelStore.fetchChannels()
+  channels.value = channelStore.channels
 
   isLoading.value = false
 })

@@ -12,7 +12,6 @@ import { useVideoStore } from '@/stores/videos'
 import { useRoute } from 'vue-router'
 import { useApiUrl } from '@/useApiUrl'
 import { IVideo } from '@/interfaces/video'
-import { AxiosError } from 'axios'
 
 const apiUrl = useApiUrl()
 const route = useRoute()
@@ -24,27 +23,12 @@ const videoUrl = computed(() => {
 })
 
 onMounted(async () => {
-  try {
-    video.value = await videoStore.fetchVideo(route.params.id as string)
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error(error.response?.data.message)
-    }
-  }
-
-  if (video.value) {
-    addToHistory(video.value._id)
-  }
+  video.value = await videoStore.fetchVideo(route.params.id as string)
+  addToHistory(video.value._id)
 })
 
 const addToHistory = async (videoId: string) => {
-  try {
-    await videoStore.addToHistory(videoId)
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error(error.response?.data.message)
-    }
-  }
+  await videoStore.addToHistory(videoId)
 }
 
 </script>
