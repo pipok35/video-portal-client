@@ -81,7 +81,7 @@ const showUploadVideoModal = ref<boolean>(false)
 const showCreateChannelModal = ref<boolean>(false)
 const showUploadAvatarModal = ref<boolean>(false)
 const user = ref<IUser | null>(null)
-const videoHistory = ref<IVideo[] | string[]>([])
+const videoHistory = ref<IVideo[]>([])
 const apiUrl = useApiUrl()
 
 onMounted(async () => {
