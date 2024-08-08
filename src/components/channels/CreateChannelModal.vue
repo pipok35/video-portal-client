@@ -16,6 +16,7 @@
 import { ref } from 'vue'
 import { useChannelStore } from '@/stores/channels'
 import { useRouter } from 'vue-router'
+import { AxiosError } from 'axios'
 
 const title = ref('')
 const description = ref('')
@@ -23,7 +24,13 @@ const channelStore = useChannelStore()
 const router = useRouter()
 
 const createChannel = async () => {
-  await channelStore.createChannel(title.value, description.value)
-  router.push({ name: 'channels' })
+  try {
+    await channelStore.createChannel(title.value, description.value)
+    router.push({ name: 'channels' })
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
+  }
 }
 </script>

@@ -24,6 +24,7 @@
 import { ref } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { IFile } from '@/interfaces/file'
+import { AxiosError } from 'axios'
 
 const videoFile = ref<IFile>()
 const previewFile = ref<IFile>()
@@ -45,7 +46,9 @@ const create = async () => {
 
     emit('close')
   } catch (error) {
-    console.error(error)
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
   }
 }
 </script>

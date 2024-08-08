@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { useFilesStore } from '@/stores/files'
+import { AxiosError } from 'axios'
 
 const filesStore = useFilesStore()
 interface Props {
@@ -29,7 +30,9 @@ const uploadFile = async (file: File, type: 'videos' | 'previews' | 'avatars') =
         emit('close')
       }
     } catch (error) {
-      console.error(error)
+      if (error instanceof AxiosError) {
+        console.error(error.response?.data.message)
+      }
     }
   }
 }

@@ -20,6 +20,7 @@ import { ref, onMounted } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { IVideo } from '@/interfaces/video'
 import VideoListItem from '@/components/videos/VideoListItem.vue'
+import { AxiosError } from 'axios'
 
 const isLoading = ref(false)
 const videos = ref<IVideo[]>([])
@@ -32,7 +33,9 @@ onMounted(async () => {
     await videoStore.fetchVideos()
     videos.value = videoStore.videos
   } catch (error) {
-    console.error(error)
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
   }
 
   isLoading.value = false

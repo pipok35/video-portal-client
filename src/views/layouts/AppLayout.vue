@@ -11,11 +11,18 @@
 import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/users'
 import AppLayoutHeader from '@/views/layouts/AppLayoutHeader.vue'
+import { AxiosError } from 'axios'
 
 const userStore = useUserStore()
 
 onMounted(async () => {
-  await userStore.fetchUser()
+  try {
+    await userStore.fetchUser()
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
+  }
 })
 </script>
 

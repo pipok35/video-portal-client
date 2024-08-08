@@ -14,14 +14,21 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useChannelStore } from '@/stores/channels'
 import { IChannel } from '@/interfaces/channel'
+import { AxiosError } from 'axios'
 
 const route = useRoute()
 const channelStore = useChannelStore()
 const channel = ref<IChannel | null>(null)
 
 onMounted(async () => {
-  const data = await channelStore.fetchChannel(route.params.id as string)
-  channel.value = data
+  try {
+    const data = await channelStore.fetchChannel(route.params.id as string)
+    channel.value = data
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
+  }
 })
 
 const subscribe = async () => {

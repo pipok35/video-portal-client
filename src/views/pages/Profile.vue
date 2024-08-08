@@ -75,6 +75,7 @@ import { IVideo } from '@/interfaces/video'
 import { IFile } from '@/interfaces/file'
 import { useApiUrl } from '@/useApiUrl'
 import BaseButton from '@/components/base/BaseButton.vue'
+import { AxiosError } from 'axios'
 
 const userStore = useUserStore()
 const showUploadVideoModal = ref<boolean>(false)
@@ -85,10 +86,16 @@ const videoHistory = ref<IVideo[]>([])
 const apiUrl = useApiUrl()
 
 onMounted(async () => {
-  await userStore.fetchUser()
-  if (userStore.user) {
-    user.value = userStore.user
-    videoHistory.value = userStore.user.videoHistory || []
+  try {
+    await userStore.fetchUser()
+    if (userStore.user) {
+      user.value = userStore.user
+      videoHistory.value = userStore.user.videoHistory || []
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
   }
 })
 
@@ -98,15 +105,27 @@ const avatarUrl = computed(() => {
 
 const handleUploadAvatar = async (file: IFile) => {
   if (user.value) {
-    await userStore.updateAvatar(user.value._id, file._id)
-    user.value = userStore.user
+    try {
+      await userStore.updateAvatar(user.value._id, file._id)
+      user.value = userStore.user
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error(error.response?.data.message)
+      }
+    }
   }
 }
 
 const updateProfile = async () => {
   if (user.value) {
-    await userStore.update(user.value._id, { ...user.value })
-    user.value = userStore.user
+    try {
+      await userStore.update(user.value._id, { ...user.value })
+      user.value = userStore.user
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error(error.response?.data.message)
+      }
+    }
   }
 }
 

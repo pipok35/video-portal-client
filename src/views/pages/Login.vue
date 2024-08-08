@@ -18,6 +18,7 @@
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/users'
 import { useRouter } from 'vue-router'
+import { AxiosError } from 'axios'
 
 const email = ref('')
 const password = ref('')
@@ -30,7 +31,9 @@ const login = async () => {
 
     router.push({ name: 'home' })
   } catch (error) {
-    console.error('Ошибка авторизации:', error)
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data.message)
+    }
   }
 }
 
