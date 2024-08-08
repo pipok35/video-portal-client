@@ -4,11 +4,12 @@
     <div v-else-if="videos.length === 0" class="text-3xl font-bold mb-4">Нет видео</div>
     <div v-else>
       <h2 class="text-3xl font-bold mb-4">Рекомендации</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-2">
         <VideoListItem
           v-for="video in videos"
           :key="video._id"
           :video="video"
+          class="w-full"
         />
       </div>
     </div>
