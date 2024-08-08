@@ -20,11 +20,9 @@ export const useChannelStore = defineStore('channel', {
     },
     async subscribeToChannel (channelId: string) {
       await axios.post(`/channels/${channelId}/subscribe`, {})
-      await this.fetchChannels()
     },
     async unsubscribeFromChannel (channelId: string) {
       await axios.post(`/channels/${channelId}/unsubscribe`, {})
-      await this.fetchChannels()
     }
   }
 })

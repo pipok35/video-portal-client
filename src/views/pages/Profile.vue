@@ -2,8 +2,8 @@
   <UploadVideoModal v-if="showUploadVideoModal" width="400px" @close="showUploadVideoModal = false" />
   <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
-  <div class="flex gap-2 p-4">
-    <div class="min-w-80">
+  <div class="flex gap-2 p-4 h-full">
+    <div class="min-w-80 max-w-80">
       <BaseCard class="h-full">
         <div class="flex flex-col gap-4 items-center mb-4">
           <img :src="avatarUrl" class="rounded-full w-40 h-40">
@@ -73,6 +73,8 @@ import { IVideo } from '@/interfaces/video'
 import { IFile } from '@/interfaces/file'
 import { useApiUrl } from '@/useApiUrl'
 import BaseButton from '@/components/base/BaseButton.vue'
+import { useNotificationStore } from '@/stores/notification'
+import { handleError } from '@/utils/errorHandler'
 
 const userStore = useUserStore()
 const showUploadVideoModal = ref<boolean>(false)
@@ -81,6 +83,7 @@ const showUploadAvatarModal = ref<boolean>(false)
 const user = ref<IUser | null>(null)
 const videoHistory = ref<IVideo[]>([])
 const apiUrl = useApiUrl()
+const notificationStore = useNotificationStore()
 
 onMounted(async () => {
   await userStore.fetchUser()
@@ -96,15 +99,29 @@ const avatarUrl = computed(() => {
 
 const handleUploadAvatar = async (file: IFile) => {
   if (user.value) {
-    await userStore.updateAvatar(user.value._id, file._id)
-    user.value = userStore.user
+    try {
+      const response = await userStore.updateAvatar(user.value._id, file._id)
+      await userStore.fetchUser()
+      user.value = userStore.user
+
+      notificationStore.addNotification({ type: response.data.status, message: response.data.message })
+    } catch (error) {
+      handleError(error)
+    }
   }
 }
 
 const updateProfile = async () => {
   if (user.value) {
-    await userStore.update(user.value._id, { ...user.value })
-    user.value = userStore.user
+    try {
+      const response = await userStore.update(user.value._id, { ...user.value })
+      await userStore.fetchUser()
+      user.value = userStore.user
+
+      notificationStore.addNotification({ type: response.data.status, message: response.data.message })
+    } catch (error) {
+      handleError(error)
+    }
   }
 }
 
@@ -114,10 +131,13 @@ const cleanHistory = async () => {
   }
   if (user.value) {
     try {
-      await userStore.cleanHistory(user.value._id)
+      const response = await userStore.cleanHistory(user.value._id)
+      await userStore.fetchUser()
       videoHistory.value = userStore.user?.videoHistory || []
+
+      notificationStore.addNotification({ type: response.data.status, message: response.data.message })
     } catch (error) {
-      console.error(error)
+      handleError(error)
     }
   }
 }

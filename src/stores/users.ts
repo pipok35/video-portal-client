@@ -22,21 +22,17 @@ export const useUserStore = defineStore('user', {
     async fetchUser () {
       if (this.token) {
         const response = await axios.get('/auth/me')
-
         this.user = response.data as IUser
       }
     },
     async update (id: string, updateUserDto: UpdateUserDto) {
-      await axios.post(`/users/${id}`, { ...updateUserDto })
-      await this.fetchUser()
+      return await axios.post(`/users/${id}`, { ...updateUserDto })
     },
     async updateAvatar (id: string, avatarId: string) {
-      await axios.patch(`/users/${id}/avatar`, { avatarId })
-      await this.fetchUser()
+      return await axios.patch(`/users/${id}/avatar`, { avatarId })
     },
     async cleanHistory (id: string) {
-      await axios.patch(`/users/${id}/cleanHistory`)
-      await this.fetchUser()
+      return await axios.patch(`/users/${id}/cleanHistory`)
     },
     logout () {
       this.token = ''
