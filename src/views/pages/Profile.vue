@@ -3,7 +3,7 @@
   <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex gap-2 p-4">
-    <div class="w-96">
+    <div class="min-w-80">
       <BaseCard class="h-full">
         <div class="flex flex-col gap-4 items-center mb-4">
           <img :src="avatarUrl" class="rounded-full w-40 h-40">
@@ -51,14 +51,12 @@
         <div class="font-bold text-2xl p-2">История просмотра</div>
         <BaseButton color="red" @click="cleanHistory">Очистить историю</BaseButton>
       </div>
-      <div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
-          <VideoListItem
-            v-for="video in videoHistory"
-            :key="video._id"
-            :video="video"
-          />
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        <VideoListItem
+          v-for="video in videoHistory"
+          :key="video._id"
+          :video="video"
+        />
       </div>
     </div>
   </div>
