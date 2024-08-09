@@ -35,7 +35,7 @@ const showUploadPreviewModal = ref<boolean>(false)
 const showUploadVideoFileModal = ref<boolean>(false)
 const videoStore = useVideoStore()
 const notificationStore = useNotificationStore()
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'upload'])
 
 const create = async () => {
   try {
@@ -47,7 +47,9 @@ const create = async () => {
     })
 
     notificationStore.addNotification({ type: response.data.status, message: response.data.message })
+
     emit('close')
+    emit('upload')
   } catch (error) {
     handleError(error)
   }

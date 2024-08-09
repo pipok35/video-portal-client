@@ -69,19 +69,38 @@ const notificationStore = useNotificationStore()
 const userChannels = ref()
 
 onMounted(async () => {
-  await userStore.fetchUser()
-  if (userStore.user) {
-    user.value = userStore.user
-    videoHistory.value = userStore.user.videoHistory || []
-  }
-
-  await channelStore.fetchChannels()
-  userChannels.value = channelStore.channels.map(channel => ({ value: channel._id, label: channel.title }))
+  loadHistory()
+  loadChannels()
 })
 
+const loadChannels = async () => {
+  try {
+    await channelStore.fetchChannels()
+    userChannels.value = channelStore.channels.map(channel => ({ value: channel._id, label: channel.title }))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+const loadHistory = async () => {
+  try {
+    await userStore.fetchUser()
+    if (userStore.user) {
+      user.value = userStore.user
+      videoHistory.value = userStore.user.videoHistory || []
+    }
+  } catch (error) {
+    handleError(error)
+  }
+}
+
 const changeChannel = async (channelId: string) => {
-  const channel = await channelStore.fetchChannel(channelId)
-  await channelStore.setChannel(channel)
+  try {
+    const channel = await channelStore.fetchChannel(channelId)
+    await channelStore.setChannel(channel)
+  } catch (error) {
+    handleError(error)
+  }
 }
 
 const avatarUrl = computed(() => {

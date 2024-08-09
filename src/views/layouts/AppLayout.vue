@@ -12,17 +12,26 @@ import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/users'
 import { useChannelStore } from '@/stores/channels'
 import AppLayoutHeader from '@/views/layouts/AppLayoutHeader.vue'
+import { handleError } from '@/utils/errorHandler'
 
 const userStore = useUserStore()
 const channelStore = useChannelStore()
 
 onMounted(async () => {
-  await userStore.fetchUser()
+  try {
+    await userStore.fetchUser()
+  } catch (error) {
+    handleError(error)
+  }
 
   const storedChannel = localStorage.getItem('channel')
   if (storedChannel) {
-    const currentChannel = await channelStore.fetchChannel(storedChannel)
-    channelStore.setChannel(currentChannel)
+    try {
+      const currentChannel = await channelStore.fetchChannel(storedChannel)
+      channelStore.setChannel(currentChannel)
+    } catch (error) {
+      handleError(error)
+    }
   }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <UploadVideoModal v-if="showUploadVideoModal" width="400px" @close="showUploadVideoModal = false" />
+  <UploadVideoModal v-if="showUploadVideoModal" width="400px" @upload="loadVideos()" @close="showUploadVideoModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex flex-col items-center justify-center w-full">
     <div class="container px-4 py-8 sm:px-6 lg:px-8">
@@ -8,7 +8,7 @@
           <div class="flex items-center gap-4">
             <div class="relative w-20 h-20">
               <img :src="avatarUrl" class="rounded-full h-full w-full" />
-              <div class="inline-flex items-center justify-center border cursor-pointer font-medium h-10 w-10 absolute bottom-0 right-0 bg-background rounded-full" @click="showUploadAvatarModal = true">
+              <div class="inline-flex items-center justify-center border cursor-pointer font-medium h-8 w-8 absolute bottom-0 right-0 bg-background rounded-full" @click="showUploadAvatarModal = true">
                 <v-icon name="fa-edit" class="pl-1" />
               </div>
             </div>
@@ -57,20 +57,27 @@ const showUploadAvatarModal = ref<boolean>(false)
 const notificationStore = useNotificationStore()
 
 onMounted(async () => {
-  channel.value = await channelStore.fetchChannel(route.params.id as string)
-
   try {
-    await videoStore.fetchVideos()
-    channelVideos.value = videoStore.videos
-    console.log(channelVideos.value)
+    channel.value = await channelStore.fetchChannel(route.params.id as string)
   } catch (error) {
-    console.error(error)
+    handleError(error)
   }
+
+  await loadVideos()
 })
 
 const avatarUrl = computed(() => {
   return channel.value?.avatarId ? `${apiUrl}/files/${channel.value.avatarId}/download` : ''
 })
+
+const loadVideos = async () => {
+  try {
+    await videoStore.fetchVideos({ channel: channel.value?._id })
+    channelVideos.value = videoStore.videos
+  } catch (error) {
+    handleError(error)
+  }
+}
 
 const handleUploadAvatar = async (file: IFile) => {
   if (channel.value) {
