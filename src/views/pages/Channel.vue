@@ -1,27 +1,23 @@
 <template>
+  <UploadVideoModal v-if="showUploadVideoModal" width="400px" @close="showUploadVideoModal = false" />
+  <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex flex-col items-center justify-center w-full">
     <div class="container px-4 py-8 sm:px-6 lg:px-8">
       <BaseCard class="mb-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <div class="relative">
-              <img
-                alt="Channel Avatar"
-                width="80"
-                height="80"
-                style="aspect-ratio: 80 / 80; object-fit: cover;"
-                class="rounded-full"
-              />
-              <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-10 w-10 absolute bottom-0 right-0 p-1 bg-background rounded-full shadow">
-                <v-icon name="fa-edit" />
-              </button>
+            <div class="relative w-20 h-20">
+              <img :src="avatarUrl" class="rounded-full h-full w-full" />
+              <div class="inline-flex items-center justify-center border cursor-pointer font-medium h-10 w-10 absolute bottom-0 right-0 bg-background rounded-full" @click="showUploadAvatarModal = true">
+                <v-icon name="fa-edit" class="pl-1" />
+              </div>
             </div>
             <div>
               <h1 class="text-2xl font-bold">{{ channel?.title }}</h1>
               <p class="text-muted-foreground">C{{ channel?.description }}</p>
             </div>
           </div>
-          <BaseButton color="red" right-icon="hi-solid-plus">Добавить видео</BaseButton>
+          <BaseButton color="red" right-icon="hi-solid-plus" @click="showUploadVideoModal = true">Добавить видео</BaseButton>
         </div>
       </BaseCard>
       <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4">
@@ -37,23 +33,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useChannelStore } from '@/stores/channels'
 import { useVideoStore } from '@/stores/videos'
 import { IChannel } from '@/interfaces/channel'
 import { IVideo } from '@/interfaces/video'
 import VideoListItem from '@/components/videos/VideoListItem.vue'
+import { useApiUrl } from '@/useApiUrl'
+import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
+import { IFile } from '@/interfaces/file'
+import { handleError } from '@/utils/errorHandler'
+import { useNotificationStore } from '@/stores/notification'
 
 const route = useRoute()
 const channelStore = useChannelStore()
 const videoStore = useVideoStore()
 const channel = ref<IChannel | null>(null)
 const channelVideos = ref<IVideo[]>([])
+const apiUrl = useApiUrl()
+const showUploadVideoModal = ref<boolean>(false)
+const showUploadAvatarModal = ref<boolean>(false)
+const notificationStore = useNotificationStore()
 
 onMounted(async () => {
-  const data = await channelStore.fetchChannel(route.params.id as string)
-  channel.value = data
+  channel.value = await channelStore.fetchChannel(route.params.id as string)
 
   try {
     await videoStore.fetchVideos()
@@ -63,4 +67,21 @@ onMounted(async () => {
     console.error(error)
   }
 })
+
+const avatarUrl = computed(() => {
+  return channel.value?.avatarId ? `${apiUrl}/files/${channel.value.avatarId}/download` : ''
+})
+
+const handleUploadAvatar = async (file: IFile) => {
+  if (channel.value) {
+    try {
+      const response = await channelStore.updateAvatar(channel.value._id, file._id)
+      channel.value = await channelStore.fetchChannel(route.params.id as string)
+
+      notificationStore.addNotification({ type: response.data.status, message: response.data.message })
+    } catch (error) {
+      handleError(error)
+    }
+  }
+}
 </script>

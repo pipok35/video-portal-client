@@ -1,5 +1,4 @@
 <template>
-  <UploadVideoModal v-if="showUploadVideoModal" width="400px" @close="showUploadVideoModal = false" />
   <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex gap-2 p-4 h-full">
@@ -49,7 +48,6 @@
 import { computed, onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/users'
 import { useChannelStore } from '@/stores/channels'
-import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
 import { IUser } from '@/interfaces/user'
 import VideoListItem from '@/components/videos/VideoListItem.vue'
@@ -62,7 +60,6 @@ import { handleError } from '@/utils/errorHandler'
 
 const userStore = useUserStore()
 const channelStore = useChannelStore()
-const showUploadVideoModal = ref<boolean>(false)
 const showCreateChannelModal = ref<boolean>(false)
 const showUploadAvatarModal = ref<boolean>(false)
 const user = ref<IUser | null>(null)

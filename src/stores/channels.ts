@@ -23,6 +23,9 @@ export const useChannelStore = defineStore('channel', {
       this.currentChannel = channel
       localStorage.setItem('channel', channel._id)
     },
+    async updateAvatar (id: string, avatarId: string) {
+      return await axios.patch(`/channels/${id}/avatar`, { avatarId })
+    },
     async subscribeToChannel (channelId: string) {
       await axios.post(`/channels/${channelId}/subscribe`, {})
     },
