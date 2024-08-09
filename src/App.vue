@@ -10,13 +10,18 @@ import Notification from '@/components/Notification.vue'
 import { axios } from './axiosConfig'
 import { useUserStore } from '@/stores/users'
 import { useRouter } from 'vue-router'
+import { useChannelStore } from '@/stores/channels'
 
 const userStore = useUserStore()
+const channelStore = useChannelStore()
 const router = useRouter()
 
 axios.interceptors.request.use(config => {
   if (userStore.token) {
     config.headers.Authorization = `Bearer ${userStore.token}`
+  }
+  if (channelStore.currentChannel) {
+    config.headers.channelId = channelStore.currentChannel._id
   }
 
   return config

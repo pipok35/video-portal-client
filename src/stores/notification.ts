@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 interface Notification {
-  id: string
+  id?: string
   type: 'success' | 'error' | 'info';
   message: string;
 }
@@ -16,7 +16,7 @@ export const useNotificationStore = defineStore('notification', {
       this.notifications.push(notification)
 
       setTimeout(() => {
-        this.removeNotification(notification.id)
+        this.removeNotification(notification.id || '')
       }, 4000)
     },
     removeNotification (id: string) {

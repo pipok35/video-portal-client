@@ -32,18 +32,20 @@
       </BaseCard>
     </div>
     <div class="grow flex flex-col gap-2">
-      <div>
+      <div class="grid grid-cols-2 gap-2">
         <BaseCard title="Профиль">
-          <div class="grid grid-cols-3 gap-4">
-            <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
-              <span>E-mail</span>
-              <BaseInput v-model="user.email" placeholder="E-mail" />
-              <span>Имя пользователя</span>
-              <BaseInput v-model="user.username" placeholder="Имя пользователя" />
-              <div><BaseButton type="submit">Изменить</BaseButton></div>
-            </form>
-            <div>
-            </div>
+          <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
+            <span>E-mail</span>
+            <BaseInput v-model="user.email" placeholder="E-mail" />
+            <span>Имя пользователя</span>
+            <BaseInput v-model="user.username" placeholder="Имя пользователя" />
+            <div><BaseButton type="submit">Изменить</BaseButton></div>
+          </form>
+        </BaseCard>
+        <BaseCard title="Канал">
+          <div class="flex flex-col gap-2">
+            <span>Текущий канал</span>
+            <BaseSelect v-model="channelStore.currentChannel._id" :options="userChannels" @option-selected="changeChannel"></BaseSelect>
           </div>
         </BaseCard>
       </div>
@@ -65,6 +67,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/users'
+import { useChannelStore } from '@/stores/channels'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
 import { IUser } from '@/interfaces/user'
@@ -77,6 +80,7 @@ import { useNotificationStore } from '@/stores/notification'
 import { handleError } from '@/utils/errorHandler'
 
 const userStore = useUserStore()
+const channelStore = useChannelStore()
 const showUploadVideoModal = ref<boolean>(false)
 const showCreateChannelModal = ref<boolean>(false)
 const showUploadAvatarModal = ref<boolean>(false)
@@ -84,6 +88,7 @@ const user = ref<IUser | null>(null)
 const videoHistory = ref<IVideo[]>([])
 const apiUrl = useApiUrl()
 const notificationStore = useNotificationStore()
+const userChannels = ref()
 
 onMounted(async () => {
   await userStore.fetchUser()
@@ -91,7 +96,15 @@ onMounted(async () => {
     user.value = userStore.user
     videoHistory.value = userStore.user.videoHistory || []
   }
+
+  await channelStore.fetchChannels()
+  userChannels.value = channelStore.channels.map(channel => ({ value: channel._id, label: channel.title }))
 })
+
+const changeChannel = async (channelId: string) => {
+  const channel = await channelStore.fetchChannel(channelId)
+  await channelStore.setChannel(channel)
+}
 
 const avatarUrl = computed(() => {
   return user.value?.avatarId ? `${apiUrl}/files/${user.value.avatarId}/download` : ''

@@ -4,7 +4,7 @@
       <div :class="classes(notification.type)">
         <v-icon name="bi-info-circle" />
         <div class="text-sm font-medium grow">{{ notification.message }}</div>
-        <button type="button" :class="buttonClasses(notification.type)" @click="removeNotification(notification.id)">
+        <button type="button" :class="buttonClasses(notification.type)" @click="removeNotification(notification.id || '')">
           <v-icon name="ri-close-fill" />
         </button>
       </div>
