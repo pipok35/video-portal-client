@@ -3,61 +3,42 @@
   <CreateChannelModal v-if="showCreateChannelModal" width="400px" @close="showCreateChannelModal = false" />
   <UploadModal v-if="showUploadAvatarModal" type="avatars" width="400px" @upload="handleUploadAvatar" @close="showUploadAvatarModal = false" />
   <div class="flex gap-2 p-4 h-full">
-    <div class="min-w-80 max-w-80">
-      <BaseCard class="h-full">
+    <BaseCard class="h-full min-w-80" title="Профиль">
+      <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-4 items-center mb-4">
           <img :src="avatarUrl" class="rounded-full w-40 h-40">
           <div><BaseButton @click="showUploadAvatarModal = true">Загрузить аватарку</BaseButton></div>
         </div>
-        <div class="menu-item">
-          <router-link class="w-full" :to="{ name: 'videos' }">
-            <v-icon name="md-ondemandvideo" scale="1.5" fill="#9c1314" />
-            Мои видео
-          </router-link>
-        </div>
-        <div class="menu-item">
-          <router-link class="w-full" :to="{ name: 'channels' }">
-            <v-icon name="hi-users" scale="1.5" fill="#9c1314" />
-            Мои каналы
-          </router-link>
-        </div>
-        <div class="menu-item" @click="showUploadVideoModal = true">
-          <v-icon name="hi-solid-plus" scale="1.5" fill="#9c1314" />
-          Загрузить видео
-        </div>
-        <div class="menu-item" @click="showCreateChannelModal = true">
-          <v-icon name="md-create" scale="1.5" fill="#9c1314" />
-          Создать канал
-        </div>
-      </BaseCard>
-    </div>
-    <div class="grow flex flex-col gap-2">
-      <div class="grid grid-cols-2 gap-2">
-        <BaseCard title="Профиль">
-          <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
-            <span>E-mail</span>
-            <BaseInput v-model="user.email" placeholder="E-mail" />
-            <span>Имя пользователя</span>
-            <BaseInput v-model="user.username" placeholder="Имя пользователя" />
-            <div><BaseButton type="submit">Изменить</BaseButton></div>
-          </form>
-        </BaseCard>
-        <BaseCard title="Канал">
-          <div class="flex flex-col gap-2">
-            <span>Текущий канал</span>
-            <BaseSelect v-model="channelStore.currentChannel._id" :options="userChannels" @option-selected="changeChannel"></BaseSelect>
+        <form v-if="user" class="flex flex-col gap-2" @submit.prevent="updateProfile">
+          <span>E-mail</span>
+          <BaseInput v-model="user.email" placeholder="E-mail" />
+          <span>Имя пользователя</span>
+          <BaseInput v-model="user.username" placeholder="Имя пользователя" />
+          <div><BaseButton type="submit">Изменить</BaseButton></div>
+        </form>
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between mb-2">
+            <div class="text-2xl font-bold">Канал</div>
+            <BaseButton size="small" @click="showCreateChannelModal = true">Добавить</BaseButton>
           </div>
-        </BaseCard>
+          <BaseSelect v-model="channelStore.currentChannel._id" :options="userChannels" @option-selected="changeChannel"></BaseSelect>
+          <BaseButton type="router-link" :to="{ name: 'channel', params: { id: channelStore.currentChannel._id } }">
+            Перейти на канал
+          </BaseButton>
+        </div>
       </div>
-      <div class="flex justify-between">
-        <div class="font-bold text-2xl p-2">История просмотра</div>
-        <BaseButton color="red" @click="cleanHistory">Очистить историю</BaseButton>
+    </BaseCard>
+    <div class="grow flex flex-col gap-4">
+      <div class="flex gap-2">
+        <div class="font-bold pl-2 text-2xl">История просмотра</div>
+        <BaseButton size="small" @click="cleanHistory">Очистить</BaseButton>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
         <VideoListItem
           v-for="video in videoHistory"
           :key="video._id"
           :video="video"
+          class="max-h-60"
         />
       </div>
     </div>

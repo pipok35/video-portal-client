@@ -1,7 +1,7 @@
 <template>
   <BaseCard class="flex flex-col gap-2 w-full">
     <router-link :to="{ name: 'video', params: { id: props.video._id }}" class="flex flex-col gap-2 h-full">
-      <img :src="previewUrl" class="rounded grow h-64 sm:h-48 md:h-64" />
+      <img :src="previewUrl" class="rounded grow" />
       <div class="text-xl font-bold">{{ props.video.title }}</div>
     </router-link>
   </BaseCard>

@@ -7,13 +7,11 @@ const authRoutes = [
 ]
 
 const videoRoutes = [
-  { name: 'videos', path: '', component: () => import('@/views/pages/Videos.vue'), meta: { layout: 'AppLayout' } },
   { name: 'video', path: ':id', component: () => import('@/views/pages/Video.vue'), meta: { layout: 'AppLayout' } }
 ]
 
 const channelRoutes = [
-  { name: 'channels', path: '', component: () => import('@/views/pages/Channels.vue'), meta: { layout: 'AppLayout' } },
-  { name: 'channel', path: ':id', component: () => import('@/views/pages/Channel.vue'), meta: { layout: 'AppLayout' } }
+  { name: 'channel', path: ':id?', component: () => import('@/views/pages/Channel.vue'), meta: { layout: 'AppLayout' } }
 ]
 
 const routes = [

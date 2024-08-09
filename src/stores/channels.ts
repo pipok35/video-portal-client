@@ -22,8 +22,6 @@ export const useChannelStore = defineStore('channel', {
     async setChannel (channel: IChannel) {
       this.currentChannel = channel
       localStorage.setItem('channel', channel._id)
-
-      await axios.post('/channels/set', { channelId: channel._id })
     },
     async subscribeToChannel (channelId: string) {
       await axios.post(`/channels/${channelId}/subscribe`, {})

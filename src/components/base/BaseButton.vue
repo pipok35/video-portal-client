@@ -28,7 +28,7 @@ interface Props {
   rightIcon?: string
   type?: string
   href?: string
-  to?: string
+  to?: object
   blank?: boolean
 }
 
