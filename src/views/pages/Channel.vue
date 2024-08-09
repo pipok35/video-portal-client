@@ -21,12 +21,7 @@
         </div>
       </BaseCard>
       <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4">
-        <VideoListItem
-          v-for="video in channelVideos"
-          :key="video._id"
-          :video="video"
-          class="max-h-60"
-        />
+        <VideosList :videos="channelVideos" />
       </div>
     </div>
   </div>
@@ -39,12 +34,12 @@ import { useChannelStore } from '@/stores/channels'
 import { useVideoStore } from '@/stores/videos'
 import { IChannel } from '@/interfaces/channel'
 import { IVideo } from '@/interfaces/video'
-import VideoListItem from '@/components/videos/VideoListItem.vue'
 import { useApiUrl } from '@/useApiUrl'
 import UploadVideoModal from '@/components/videos/UploadVideoModal.vue'
 import { IFile } from '@/interfaces/file'
 import { handleError } from '@/utils/errorHandler'
 import { useNotificationStore } from '@/stores/notification'
+import VideosList from '@/components/videos/VideosList.vue'
 
 const route = useRoute()
 const channelStore = useChannelStore()

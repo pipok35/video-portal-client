@@ -5,12 +5,7 @@
     <div v-else>
       <h2 class="text-3xl font-bold mb-4">Рекомендации</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-2">
-        <VideoListItem
-          v-for="video in videos"
-          :key="video._id"
-          :video="video"
-          class="w-full"
-        />
+        <VideosList :videos="videos" />
       </div>
     </div>
   </div>
@@ -20,7 +15,7 @@
 import { ref, onMounted } from 'vue'
 import { useVideoStore } from '@/stores/videos'
 import { IVideo } from '@/interfaces/video'
-import VideoListItem from '@/components/videos/VideoListItem.vue'
+import VideosList from '@/components/videos/VideosList.vue'
 
 const isLoading = ref(false)
 const videos = ref<IVideo[]>([])

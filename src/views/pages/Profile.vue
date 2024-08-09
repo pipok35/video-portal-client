@@ -33,12 +33,7 @@
         <BaseButton size="small" @click="cleanHistory">Очистить</BaseButton>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
-        <VideoListItem
-          v-for="video in videoHistory"
-          :key="video._id"
-          :video="video"
-          class="max-h-60"
-        />
+        <VideosList :videos="videoHistory" />
       </div>
     </div>
   </div>
@@ -50,7 +45,7 @@ import { useUserStore } from '@/stores/users'
 import { useChannelStore } from '@/stores/channels'
 import CreateChannelModal from '@/components/channels/CreateChannelModal.vue'
 import { IUser } from '@/interfaces/user'
-import VideoListItem from '@/components/videos/VideoListItem.vue'
+import VideosList from '@/components/videos/VideosList.vue'
 import { IVideo } from '@/interfaces/video'
 import { IFile } from '@/interfaces/file'
 import { useApiUrl } from '@/useApiUrl'

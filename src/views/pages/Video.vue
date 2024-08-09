@@ -62,11 +62,7 @@
     <div class="grid gap-4 h-full">
       <div class="grid gap-2">
         <div class="grid gap-4 overflow-y-auto max-h-svh pr-2">
-          <VideoListItem
-            v-for="recommendation in recommendations"
-            :key="recommendation._id"
-            :video="recommendation"
-          />
+          <VideosList :videos="recommendations" />
         </div>
       </div>
     </div>
@@ -80,7 +76,7 @@ import { useUserStore } from '@/stores/users'
 import { useRoute } from 'vue-router'
 import { useApiUrl } from '@/useApiUrl'
 import { IVideo } from '@/interfaces/video'
-import VideoListItem from '@/components/videos/VideoListItem.vue'
+import VideosList from '@/components/videos/VideosList.vue'
 
 const apiUrl = useApiUrl()
 const route = useRoute()
