@@ -25,6 +25,7 @@
           Зарегистрироваться
         </BaseButton>
         <div v-if="route.meta.layout === 'AppLayout'" class="flex gap-2 items-center">
+          <BaseButton type="router-link" :to="{ name: 'channel', params: { id: channelStore.currentChannel._id } }">Мой канал</BaseButton>
           <router-link :to="{ name: 'profile' }" class="min-w-10 min-h-10"><img :src="avatarUrl" class="block rounded-full max-w-12 min-h-12" /></router-link>
           <BaseButton color="red" size="large" right-icon="io-exit-outline" @click="logout">Выйти</BaseButton>
         </div>
@@ -35,11 +36,13 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores/users'
+import { useChannelStore } from '@/stores/channels'
 import { useRouter, useRoute } from 'vue-router'
 import { useApiUrl } from '@/useApiUrl'
 import { computed } from 'vue'
 
 const userStore = useUserStore()
+const channelStore = useChannelStore()
 const router = useRouter()
 const route = useRoute()
 const apiUrl = useApiUrl()
